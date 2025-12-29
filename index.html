@@ -1,0 +1,860 @@
+<!Doctype HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>HomePage</title>
+<link href="home.css" rel="stylesheet" type="text/css">
+</head>
+<body id="bgcolor"></body>
+<div id="clock"></div>
+
+<div id="toastContainer"></div>
+	<button onclick="showToast('Thank you for showing support across my website!', 'info')">
+  Support Message
+	</button>
+<script>
+// Toast //
+window.addEventListener("load", () => {
+  document.body.classList.add("loaded");
+});
+</script>
+<div id="google_translate_element" class="google-toggle"></div>
+<button id="themeToggle" class="theme-btn">Background Changer</button>
+<script>
+// Background Colour Changer (Advanced Version) //
+document.addEventListener("DOMContentLoaded", () => {
+  const themeToggle = document.getElementById("themeToggle");
+  const body = document.body;
+
+  const themes = [
+    "blue",
+    "pink",
+    "purple",
+    "gold",
+    "silver",
+    "noir",
+    "red",
+    "peach",
+    "midnight"
+  ];
+
+  // Load saved theme
+  let currentTheme = localStorage.getItem("theme") || "blue";
+
+  body.classList.add(`${currentTheme}-theme`);
+
+  themeToggle.addEventListener("click", () => {
+    // Remove current theme
+    body.classList.remove(`${currentTheme}-theme`);
+
+    // Get next theme index
+    let index = themes.indexOf(currentTheme);
+    index = (index + 1) % themes.length;
+
+    // Apply next theme
+    currentTheme = themes[index];
+    body.classList.add(`${currentTheme}-theme`);
+
+    // Save
+    localStorage.setItem("theme", currentTheme);
+  });
+});
+</script>
+
+
+<button id="toggleHighContrast" class="contrast-toggle">Contrast Boost</button>
+<script>
+// Contrast Toggle //
+document.getElementById("toggleHighContrast").addEventListener("click", () => {
+    document.body.classList.toggle("high-contrast-mode");
+});
+</script>
+
+<div id="cursor-glow"></div>
+<canvas id="particle-canvas"></canvas>
+<script>
+// Curser Glow //
+const canvas = document.getElementById("particle-canvas");
+const ctx = canvas.getContext("2d");
+const cursorGlow = document.getElementById("cursor-glow");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+let cursorX = 0;
+let cursorY = 0;
+
+class Particle {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.size = Math.random() * 5 + 2;
+        this.speedX = (Math.random() - 0.5) * 2;
+        this.speedY = (Math.random() - 0.5) * 2;
+        this.opacity = 1;
+    }
+
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.opacity -= 0.02;
+    }
+
+    draw() {
+        ctx.fillStyle = `rgba(255,255,255,${this.opacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+function handleParticles() {
+    for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.update();
+        p.draw();
+        if (p.opacity <= 0) particles.splice(i, 1);
+    }
+}
+
+function updateCursor() {
+    cursorGlow.style.left = `${cursorX}px`;
+    cursorGlow.style.top = `${cursorY}px`;
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    updateCursor();
+    handleParticles();
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+window.addEventListener("mousemove", e => {
+    cursorX = e.clientX;
+    cursorY = e.clientY;
+
+    cursorGlow.style.transform = "translate(-50%, -50%) scale(1.18)";
+    setTimeout(() => {
+        cursorGlow.style.transform = "translate(-50%, -50%) scale(1)";
+    }, 80);
+
+    for (let i = 0; i < 4; i++) {
+        particles.push(new Particle(e.x, e.y));
+    }
+});
+
+window.addEventListener("touchmove", e => {
+    const t = e.touches[0];
+    cursorX = t.clientX;
+    cursorY = t.clientY;
+    for (let i = 0; i < 4; i++) {
+        particles.push(new Particle(t.clientX, t.clientY));
+    }
+});
+
+window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+</script>
+
+
+<div id="chat-button">💬</div>
+<div id="chat-widget">
+  <div class="chat-header">
+    <span>Chat Support</span>
+    <button id="chat-close">×</button>
+  </div>
+
+  <div class="chat-body" id="chat-body">
+    <div class="bot-message">Hi! How can I help you today?</div>
+  </div>
+
+  <div class="chat-input-area">
+    <input type="text" id="chat-input" placeholder="Type a message...">
+    <button id="chat-send">➤</button>
+  </div>
+</div>
+<script>
+// Chat Widget //
+const chatButton = document.getElementById("chat-button");
+const chatWidget = document.getElementById("chat-widget");
+const chatClose = document.getElementById("chat-close");
+const chatBody = document.getElementById("chat-body");
+const chatInput = document.getElementById("chat-input");
+const chatSend = document.getElementById("chat-send");
+
+// Open Chat
+chatButton.onclick = () => {
+  chatWidget.style.display = "flex";
+  chatButton.style.display = "none";
+};
+
+// Close Chat
+chatClose.onclick = () => {
+  chatWidget.style.display = "none";
+  chatButton.style.display = "flex";
+};
+
+// Add a message
+function addMessage(content, type) {
+  const msg = document.createElement("div");
+  msg.className = type === "user" ? "user-message" : "bot-message";
+  msg.textContent = content;
+  chatBody.appendChild(msg);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+// Bot Replies
+const replies = [
+  "Thanks for reaching out! I’m afraid I can’t help with that here, but the contact form can.",
+  "I appreciate your message! I’m not able to assist with this, but the contact form will point you in the right direction.",
+  "Sorry—I’m not able to process that request. Please try using the contact form instead.",
+  "Thanks for asking! I’m limited in what I can do, but the contact form is the best place for support.",
+  "I’m unable to complete that action, but someone on the other end of the contact form will be happy to help.",
+  "I did my best to understand, but I can’t handle this one. The contact form should get you the support you need!",
+  "I’m here to guide you, but this request will need to go through the contact form.",
+  "That’s a bit outside what I’m able to do, but the contact form can assist you properly.",
+  "I don’t have the tools to help with that, but you can get support quickly through the contact form.",
+  "Thanks for your question! Please reach out using the contact form so someone can assist you directly."
+];
+
+// Sending Messages
+chatSend.onclick = () => {
+  const text = chatInput.value.trim();
+  if (!text) return;
+
+  addMessage(text, "user");
+  chatInput.value = "";
+
+  setTimeout(() => {
+    const reply = replies[Math.floor(Math.random() * replies.length)];
+    addMessage(reply, "bot");
+  }, 600);
+};
+
+// Pressing enter = Sends a direct message
+chatInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") chatSend.click();
+});
+</script>
+
+
+<div id="cookie-banner">
+  <div class="cookie-text">
+    This site uses cookies to improve your experience. By using this site, you agree to our cookie policy.
+  </div>
+  <button id="cookie-accept">Got it</button>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<audio id="successSound" src="Audio/cutepop.mp3"></audio>
+<script>
+// Confetti Explosion for Cookies Banner //
+function girlyButtonConfetti(x, y) {
+  const origin = {
+    x: x / window.innerWidth,
+    y: y / window.innerHeight
+  };
+
+  confetti({
+    particleCount: 30,
+    spread: 55,
+    origin: origin,
+    shapes: ["heart"],
+    colors: ["#ff66b3", "#ff99cc", "#cc66ff", "#ffb3e6"],
+    scalar: 1.4
+  });
+
+  confetti({
+    particleCount: 25,
+    spread: 60,
+    origin: origin,
+    colors: ["#ffd700", "#fff0b3"],
+    scalar: 0.9
+  });
+
+  confetti({
+    particleCount: 40,
+    spread: 70,
+    origin: origin,
+    colors: ["#ff66b3", "#b366ff", "#ff99cc", "#ffccf2"],
+  });
+}
+</script>
+<script>
+document.getElementById("cookie-accept").addEventListener("click", (e) => {
+  girlyButtonConfetti(e.clientX, e.clientY);
+});
+</script>
+<script>
+// Check if user already accepted cookies
+if (!localStorage.getItem("cookiesAccepted")) {
+  document.getElementById("cookie-banner").style.display = "flex";
+}
+
+// User clicks = "Got it"
+document.getElementById("cookie-accept").onclick = () => {
+  localStorage.setItem("cookiesAccepted", "true");
+  document.getElementById("cookie-banner").style.display = "none";
+};
+</script>
+
+
+<div id="visitCounter">👀 Total Visits: <span id="visitCount">0</span></div>
+<script>
+// Visit Counter //
+let totalVisits = localStorage.getItem("totalVisits");
+
+// If no record exists, create one
+if (!totalVisits) {
+  totalVisits = 0;
+}
+
+// Convert to number
+totalVisits = parseInt(totalVisits);
+
+// Increase by 1 every time the page loads
+totalVisits++;
+
+// Save updated value
+localStorage.setItem("totalVisits", totalVisits);
+
+// Display it
+document.getElementById("visitCount").innerText = totalVisits;
+</script>
+
+
+<script>
+// Alert Message //
+    document.addEventListener("DOMContentLoaded", () => {
+  alert("Welcome to the Home page!");
+});
+</script>
+
+
+<script>
+// Live Clock //
+function updateClock() {
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+  const seconds = String(now.getSeconds()).padStart(2, "0");
+
+  document.getElementById("clock").textContent = `${hours}:${minutes}:${seconds}`;
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+</script>
+
+
+<div class="reaction-box">
+    <button class="reaction-btn" data-reaction="like">👍 <span>0</span></button>
+    <button class="reaction-btn" data-reaction="love">❤️ <span>0</span></button>
+    <button class="reaction-btn" data-reaction="wow">😮 <span>0</span></button>
+    <button class="reaction-btn" data-reaction="laugh">😁 <span>0</span></button>
+</div>
+<script>
+// Reaction Box //
+const reactionButtons = document.querySelectorAll(".reaction-btn");
+
+// Load existing reaction counts
+reactionButtons.forEach(button => {
+    const type = button.dataset.reaction;
+    const stored = localStorage.getItem(`reaction-${type}`);
+
+    if (stored) {
+        button.querySelector("span").textContent = stored;
+    }
+});
+
+// Button Click Logic
+reactionButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        const type = button.dataset.reaction;
+        let count = parseInt(button.querySelector("span").textContent);
+
+        // Increase count by 1
+        count++;
+        button.querySelector("span").textContent = count;
+
+        // Save to localStorage
+        localStorage.setItem(`reaction-${type}`, count);
+
+        // Animation visual feedback
+        button.classList.add("active");
+        setTimeout(() => button.classList.remove("active"), 200);
+    });
+});
+</script>
+
+
+ <header id="Banner">
+    <h1>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Creative Coding - Aimman Jawad</h1>
+    <h2>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ~ No matter how hard it gets, never give up; a lioness never quits, she conquers.</h2> 
+  </header>
+	
+   <nav class="navbar">
+  <ul>
+    <li><a href="index.html" class="active">
+      <img src="Images/Home.png" alt="Home Icon"> Home
+    </a></li>
+    <li><a href="Skills.html">
+      <img src="Images/Skills.png" alt="Skills Icon"> Skills
+    </a></li>
+    <li><a href="Achievements.html">
+      <img src="Images/Achievements.png" alt="Achievements Icon"> Achievements
+    </a></li>
+    <li><a href="Experiences.html">
+      <img src="Images/Experiences.png" alt="Experiences Icon"> Experiences
+    </a></li>
+    <li><a href="Personal Life.html">
+      <img src="Images/Personal Life.png" alt="Personal Life Icon"> Personal Life
+    </a></li>
+    <li><a href="Contact.html">
+      <img src="Images/Contact.png" alt="Contact Icon"> Contact
+    </a></li>
+  </ul>
+</nav>
+
+
+
+<script>
+// Interactive Navigation = Hover Sound Effects //
+
+// Preload the sound
+const hoverSound = new Audio("Audio/cutepop.mp3"); 
+hoverSound.volume = 0.4; // optional: adjust volume
+
+// Select all navbar links
+const navLinks = document.querySelectorAll(".navbar a");
+
+navLinks.forEach(link => {
+    link.addEventListener("mouseenter", () => {
+        // Restart sound from the beginning to prevent overlap
+        hoverSound.currentTime = 0;
+        hoverSound.play();
+    });
+});
+</script>
+
+
+<div class="font-resizer">
+  <button id="DecreaseFont">A-</button>
+  <button id="DefaultFont">A</button>
+  <button id="IncreaseFont">A+</button>
+</div>
+<script>
+// Font Enlarger //
+document.addEventListener("DOMContentLoaded", () => {
+  let fontSize = parseInt(localStorage.getItem("fontSize"));
+
+  function updateFont() {
+    const textElements = document.querySelectorAll("body *:not(script):not(style)");
+    textElements.forEach(el => {
+      el.style.fontSize = fontSize + "px";
+    });
+    localStorage.setItem("fontSize", fontSize);
+  }
+
+
+  if (fontSize) {
+    updateFont();
+  }
+
+  document.getElementById("IncreaseFont").onclick = () => {
+    fontSize = fontSize ? fontSize + 2 : 18;
+    updateFont();
+  };
+
+  document.getElementById("DecreaseFont").onclick = () => {
+    fontSize = fontSize ? fontSize - 2 : 14;
+    updateFont();
+  };
+
+  document.getElementById("DefaultFont").onclick = () => {
+    localStorage.removeItem("fontSize"); // Reset
+    fontSize = null;
+
+
+    const textElements = document.querySelectorAll("body *");
+    textElements.forEach(el => el.style.fontSize = "");
+
+  };
+});
+</script>
+
+  <main class="about-container">
+    <video controls poster="Images/Priyanka.jpg" loop preload="none" src="Videos/Priyanka.mp4"></video>
+
+    <section class="about-section">
+		<div id="videoModalBackdrop" class="video-modal-backdrop" aria-hidden="true" role="dialog" aria-label="Video popup">
+  <div class="video-modal" role="document">
+    <button id="videoModalClose" class="video-modal-close" aria-label="Close video">&times;</button>
+    <div id="videoModalContent"></div>
+  </div>
+</div>
+      <h3><img src="Images/Book.png" alt="Book Icon" width="80" height="80">About Me - Learn all the incredible information about Aimman!</h3>
+<p class="typewriter"
+   data-words="Hello, I’m Aimman Jawad, an aspiring junior web developer eager to start my career in web development."
+   data-speed="40"
+   data-pause="1000">
+   Hello, I’m Aimman Jawad, an aspiring junior web developer eager to start my career in web development.
+</p>
+
+<p class="typewriter"
+   data-words="I love learning new coding skills, solving problems, and creating designs that inspire and motivate others."
+   data-speed="40"
+   data-pause="1000">
+   I love learning new coding skills, solving problems, and creating designs that inspire and motivate others.
+</p>
+
+<p class="typewriter"
+   data-words="This website is my space to share my progress, dedication, and journey toward becoming a confident and creative developer."
+   data-speed="40"
+   data-pause="1000">
+   This website is my space to share my progress, dedication, and journey toward becoming a confident and creative developer.
+</p>
+<script>
+// Animated Typing Text
+document.addEventListener("DOMContentLoaded", () => {
+  const elements = document.querySelectorAll(".typewriter");
+
+  elements.forEach(el => {
+    const phrases = el.dataset.words.split("||");
+    const speed = parseInt(el.dataset.speed) || 80;
+    const pause = parseInt(el.dataset.pause) || 1000;
+    let phraseIndex = 0;
+    let charIndex = 0;
+
+    // Reduced motion support
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.textContent = phrases[0];
+      return;
+    }
+
+    function type() {
+      const currentPhrase = phrases[phraseIndex];
+
+      el.textContent = currentPhrase.substring(0, charIndex + 1);
+      charIndex++;
+
+      // Stop after full text is typed
+      if (charIndex === currentPhrase.length) {
+        phraseIndex++;
+        if (phraseIndex >= phrases.length) {
+          return;
+        }
+        charIndex = 0;
+        return setTimeout(type, pause);
+      }
+
+      setTimeout(type, speed);
+    }
+
+    type();
+  });
+});
+</script>
+
+    </section>
+	 </main>
+  <footer class="footer">
+    <div class="footer-left">
+    <p><img src="Images/Email.png" class="nav-icon" alt="Email Icon"> AimmanJ26@gmail.com</p>
+    <p><img src="Images/Telephone.png" class="nav-icon" alt="Phone Icon"> 074567856553</p>
+  </div>
+
+    <div class="footer-right">
+      <a href="https://www.facebook.com/JCSFCollege/" target="_blank"><img src="Images/Facebook.png" alt="Facebook Icon"></a>
+    <a href="https://www.linkedin.com/company/joseph-chamberlain-sixth-form-college/" target="_blank"><img src="Images/LinkedIn.png" alt="LinkedIn Icon"></a>
+    <a href="https://x.com/jcsfcollege" target="_blank"><img src="Images/X Twitter.png" alt="X (Twitter) Icon"></a>
+    <a href="https://www.youtube.com/@josephchamberlain4139" target="_blank"><img src="Images/YouTube.png" alt="YouTube Icon"></a>
+    <a href="https://www.instagram.com/jcsfcollege/?hl=en" target="_blank"><img src="Images/Instagram.png" alt="Instagram Icon"></a>
+  </div>
+</footer>
+<script src="script.js"></script>
+<script>
+// Google Translation //
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement(
+    { pageLanguage: 'en' },
+    'google_translate_element'
+  );
+}
+</script>
+
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<div class="tts-widget">
+  <h3>🔊 Text to Speech</h3>
+
+  <textarea id="ttsText" placeholder="Type something and I will speak it..." rows="4"></textarea>
+
+  <label>Choose Voice:</label>
+  <select id="ttsVoice"></select>
+
+  <label>Speed:</label>
+  <input type="range" id="ttsRate" min="0.5" max="2" step="0.1" value="1">
+
+  <label>Pitch:</label>
+  <input type="range" id="ttsPitch" min="0" max="2" step="0.1" value="1">
+
+  <button id="ttsSpeak">Speak</button>
+  <button id="ttsStop">Stop</button>
+</div>
+<script>
+// Text to Speech Widget //
+const ttsText = document.getElementById("ttsText");
+const ttsVoice = document.getElementById("ttsVoice");
+const ttsRate = document.getElementById("ttsRate");
+const ttsPitch = document.getElementById("ttsPitch");
+const ttsSpeak = document.getElementById("ttsSpeak");
+const ttsStop = document.getElementById("ttsStop");
+
+let voices = [];
+
+// Load voices into dropdown
+function loadVoices() {
+  voices = speechSynthesis.getVoices();
+  ttsVoice.innerHTML = ""; 
+
+  voices.forEach((voice, i) => {
+    const option = document.createElement("option");
+    option.value = i;
+    option.textContent = `${voice.name} (${voice.lang})`;
+    ttsVoice.appendChild(option);
+  });
+}
+
+// Some browsers load voices asynchronously
+speechSynthesis.onvoiceschanged = loadVoices;
+loadVoices();
+
+ttsSpeak.onclick = () => {
+  const text = ttsText.value.trim();
+  if (!text) return alert("Please type something to speak!");
+
+  const utter = new SpeechSynthesisUtterance(text);
+
+  utter.voice = voices[ttsVoice.value];
+  utter.rate = parseFloat(ttsRate.value); 
+  utter.pitch = parseFloat(ttsPitch.value);
+
+  speechSynthesis.speak(utter);
+};
+
+ttsStop.onclick = () => {
+  speechSynthesis.cancel();
+};
+</script>
+
+<script>
+// Video Popup //
+(function() {
+  // Grab the first video inside .about-container
+  const originalVideo = document.querySelector('.about-container video');
+
+  // If no video found, do nothing
+  if (!originalVideo) return;
+
+  const backdrop = document.getElementById('videoModalBackdrop');
+  const modalContent = document.getElementById('videoModalContent');
+  const closeBtn = document.getElementById('videoModalClose');
+
+  // Build a cloned video element (when opening) to avoid interfering with the page video
+  function createModalVideo() {
+    const v = document.createElement('video');
+
+    // Copy attributes you want (src, poster). Not copying loop since modal should not necessarily loop.
+    if (originalVideo.getAttribute('src')) v.setAttribute('src', originalVideo.getAttribute('src'));
+    if (originalVideo.getAttribute('poster')) v.setAttribute('poster', originalVideo.getAttribute('poster'));
+
+    v.setAttribute('controls', '');
+    v.setAttribute('playsinline', ''); // mobile inline control
+    v.setAttribute('preload', 'metadata');
+    v.style.maxHeight = '80vh';
+    v.style.width = '100%';
+    v.style.height = 'auto';
+
+    // Auto-play: try to play, catch promise rejections silently (autoplay policy).
+    v.autoplay = true;
+    v.muted = false; // you can set true to ensure autoplay on some browsers, but user may prefer sound
+    return v;
+  }
+
+  // Open modal and start playback
+  function openModal() {
+    // If already open, ignore
+    if (backdrop.classList.contains('active')) return;
+
+    // Pause the original on-page video (so only modal plays)
+    try { originalVideo.pause(); } catch(e){}
+
+    // Inject cloned video into modal content
+    const modalVideo = createModalVideo();
+    modalContent.innerHTML = ''; // clear any previous
+    modalContent.appendChild(modalVideo);
+
+    // Wait a tick then attempt to play
+    setTimeout(() => {
+      const playPromise = modalVideo.play();
+      if (playPromise && typeof playPromise.then === 'function') {
+        playPromise.catch(err => {
+          // autoplay may be blocked; optionally show controls and let user press play
+          console.warn('Autoplay blocked or failed:', err);
+        });
+      }
+    }, 40);
+
+    // Show backdrop
+    backdrop.classList.add('active');
+    backdrop.setAttribute('aria-hidden', 'false');
+
+    // Trap focus lightly (send focus to close button)
+    closeBtn.focus();
+
+    // Store pointer to the cloned video for later pause
+    backdrop._modalVideo = modalVideo;
+  }
+
+  // Close modal and cleanup
+  function closeModal() {
+    if (!backdrop.classList.contains('active')) return;
+    const modalVideo = backdrop._modalVideo;
+    if (modalVideo) {
+      try {
+        modalVideo.pause();
+        // remove src to free memory
+        modalVideo.removeAttribute('src');
+        modalVideo.load();
+      } catch (e) {}
+    }
+
+    // Hide backdrop and cleanup DOM
+    backdrop.classList.remove('active');
+    backdrop.setAttribute('aria-hidden', 'true');
+    modalContent.innerHTML = '';
+
+    // Return focus to the on-page video for accessibility
+    try { originalVideo.focus(); } catch(e){}
+  }
+
+  // Toggle by clicking the original video element
+  originalVideo.style.cursor = 'pointer';
+  originalVideo.addEventListener('click', openModal);
+
+  // Close button / overlay click handlers
+  closeBtn.addEventListener('click', closeModal);
+
+  // If user clicks the backdrop (but not inside modal content), close
+  backdrop.addEventListener('click', (e) => {
+    if (e.target === backdrop) closeModal();
+  });
+
+  // Keyboard: ESC to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' || e.key === 'Esc') {
+      if (backdrop.classList.contains('active')) {
+        closeModal();
+      }
+    }
+  });
+
+  // If the user navigates away from the page or unloads, pause any playing modal video
+  window.addEventListener('pagehide', () => {
+    const mv = backdrop._modalVideo;
+    if (mv && !mv.paused) try { mv.pause(); } catch(e){}
+  });
+
+})();
+</script>	
+
+<script>
+// Keyboard Navigation //
+document.addEventListener("keydown", (event) => {
+    const key = event.key.toLowerCase();
+
+    // Ignore typing in text fields
+    if (["input", "textarea"].includes(event.target.tagName.toLowerCase())) return;
+
+    // Quick Page Navigation
+    switch (key) {
+        case "h":
+            window.location.href = "Home.html";
+            break;
+        case "s":
+            window.location.href = "Skills.html";
+            break;
+        case "a":
+            window.location.href = "Achievements.html";
+            break;
+        case "e":
+            window.location.href = "Experiences.html";
+            break;
+        case "p":
+            window.location.href = "Personal Life.html";
+            break;
+        case "c":
+            window.location.href = "Contact.html";
+            break;
+    }
+
+    // Smooth Scroll Enhancements
+    if (key === "arrowdown") {
+        window.scrollBy({ top: 80, behavior: "smooth" });
+    }
+
+    if (key === "arrowup") {
+        window.scrollBy({ top: -80, behavior: "smooth" });
+    }
+
+    if (key === " ") {
+        if (event.shiftKey) {
+            // Shift + Space = jump UP
+            window.scrollBy({ top: -500, behavior: "smooth" });
+        } else {
+            // Space = jump DOWN
+            window.scrollBy({ top: 500, behavior: "smooth" });
+        }
+        event.preventDefault(); // stop page from jumping uncontrollably
+    }
+
+    if (key === "escape") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+});
+</script>
+
+<script>
+/* Offline Detection */
+(function () {
+  let alreadyAsked = false;
+
+  function handleOffline() {
+    if (alreadyAsked) return;
+    alreadyAsked = true;
+
+    confirm("Are you offline?");
+  }
+
+  function handleOnline() {
+    alreadyAsked = false;
+    console.log("Your back online!");
+  }
+
+  if (!navigator.onLine) {
+    handleOffline();
+  }
+
+  window.addEventListener("offline", handleOffline);
+  window.addEventListener("online", handleOnline);
+})();	
+</script>
+
+</html>
