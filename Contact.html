@@ -643,58 +643,35 @@ document.addEventListener("DOMContentLoaded", () => {
     <p><img src="Images/Address.png" alt="Address icon"> <strong>Address:</strong> Joseph Chamberlain College, 1 Belgrave Rd, Balsall Heath, Birmingham, B12 9FF</p>
   </div>
 
-  <form action="https://api.web3forms.com/submit" method="POST" class="contact-card">
-
-    <input type="hidden" name="access_key" value="32a48f13-8220-49c8-a203-3b4b89205dca">
-    <input type="hidden" name="replyto" value="{{email}}">
+ <form action="https://formsubmit.co/E17684@jcc.ac.uk" method="POST" class="contact-card">
 
     <h3>Contact Form</h3>
 
     <input type="text" name="name" placeholder="Name*" required>
+
     <input type="email" name="email" placeholder="Email Address*" required>
+
     <textarea name="message" placeholder="Message* please enter your message in here" required></textarea>
 
+    <!-- FormSubmit options -->
+    <input type="hidden" name="_cc" value="email">
+    <input type="hidden" name="_subject" value="New Contact Form Submission">
+    <input type="hidden" name="_captcha" value="false">
+
     <div class="send-row">
-    <div class="left-side">
-        <input type="checkbox" id="copyCheck">
-        <label for="copyCheck" class="copy-email">
-            Send a copy to my email address
-        </label>
+        <div class="left-side">
+            <!-- Checkbox kept for UI consistency -->
+            <input type="checkbox" checked disabled>
+            <label class="copy-email">
+                A copy will be sent to your email address
+            </label>
+        </div>
 
-        <!-- Auto-response (acts as copy to sender) -->
+        <button type="submit" class="send-btn">Send</button>
     </div>
-
-    <button type="submit" class="send-btn">Send</button>
-</div>
-
 
 </form>
 </section>
-
-<script>
-const form = document.querySelector('.contact-card');
-const copyCheck = document.getElementById('copyCheck');
-
-form.addEventListener('submit', () => {
-    const existing = document.getElementById('autoResponseField');
-
-    if (copyCheck.checked) {
-        if (!existing) {
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'autoresponse';
-            input.id = 'autoResponseField';
-            input.value =
-                "Thanks for contacting me! A copy of your message has been sent to your email.";
-            form.appendChild(input);
-        }
-    } else {
-        if (existing) {
-            existing.remove();
-        }
-    }
-});
-</script>
 
 
 
@@ -934,5 +911,6 @@ document.addEventListener("keydown", (event) => {
 
 
 </html>
+
 
 
