@@ -643,7 +643,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <p><img src="Images/Address.png" alt="Address icon"> <strong>Address:</strong> Joseph Chamberlain College, 1 Belgrave Rd, Balsall Heath, Birmingham, B12 9FF</p>
   </div>
 
-<form action="https://formsubmit.co/miahrahid123x@gmail.com" method="POST" class="contact-card">
+<form id="contact-form" class="contact-card">
 
     <h3>Contact Form</h3>
 
@@ -653,20 +653,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <textarea name="message" placeholder="Message* please enter your message in here" required></textarea>
 
-    <!-- FormSubmit options -->
-    <input type="hidden" name="_subject" value="New Contact Form Submission">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_template" value="table">
-
-    <!-- Optional success redirect (recommended) -->
-    <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html">
-
     <div class="send-row">
         <div class="left-side">
-            <!-- UI-only checkbox (no FormSubmit logic attached) -->
-            <input type="checkbox" checked disabled>
-            <label class="copy-email">
-                A copy will be sent to your email address
+            <input type="checkbox" id="sendCopy" checked>
+            <label class="copy-email" for="sendCopy">
+                Send me a copy of this email
             </label>
         </div>
 
@@ -913,8 +904,47 @@ document.addEventListener("keydown", (event) => {
 })();	
 </script>
 
+	<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+(function () {
+  emailjs.init("YOUR_PUBLIC_KEY"); // <-- replace this
+})();
+
+document.getElementById("contact-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const name = this.name.value;
+  const email = this.email.value;
+  const message = this.message.value;
+  const sendCopy = document.getElementById("sendCopy").checked;
+
+  // SEND TO OWNER
+  emailjs.send("YOUR_SERVICE_ID", "OWNER_TEMPLATE_ID", {
+    name: name,
+    email: email,
+    message: message,
+    to_email: "miahrahid123x@gmail.com"
+  });
+
+  // SEND COPY TO USER
+  if (sendCopy) {
+    emailjs.send("YOUR_SERVICE_ID", "USER_TEMPLATE_ID", {
+      name: name,
+      email: email,
+      message: message,
+      to_email: email
+    });
+  }
+
+  alert("Message sent successfully!");
+  this.reset();
+});
+</script>
+
 
 </html>
+
 
 
 
