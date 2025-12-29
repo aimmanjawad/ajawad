@@ -904,11 +904,11 @@ document.addEventListener("keydown", (event) => {
 })();	
 </script>
 
-	<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 <script>
 (function () {
-  emailjs.init("FuQClBhdNkUbBGRUd");
+  emailjs.init("FuQClBhdNkUbBGRUd"); // Public Key
 })();
 
 document.getElementById("contact-form").addEventListener("submit", function (e) {
@@ -920,21 +920,35 @@ document.getElementById("contact-form").addEventListener("submit", function (e) 
   const sendCopy = document.getElementById("sendCopy").checked;
 
   // SEND TO OWNER
-  emailjs.send("service_xmn9thf", "template_foj2bya", {
+  emailjs.send("service_xnn9thf", "template_foj2bya", {
     name: name,
     email: email,
     message: message,
     to_email: "aimmanjawad11@gmail.com"
-  });
+  }).then(
+    function () {
+      console.log("Owner email sent");
+    },
+    function (error) {
+      console.error("Owner email failed:", error);
+    }
+  );
 
-  // SEND COPY TO USER (FULL DETAILS)
+  // SEND COPY TO USER
   if (sendCopy) {
-    emailjs.send("service_xmn9thf", "template_zw7apxo", {
+    emailjs.send("service_xnn9thf", "template_zw7apxo", {
       name: name,
       email: email,
       message: message,
       to_email: email
-    });
+    }).then(
+      function () {
+        console.log("User copy sent");
+      },
+      function (error) {
+        console.error("User email failed:", error);
+      }
+    );
   }
 
   alert("Message sent successfully!");
@@ -942,8 +956,8 @@ document.getElementById("contact-form").addEventListener("submit", function (e) 
 });
 </script>
 
-
 </html>
+
 
 
 
