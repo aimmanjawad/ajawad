@@ -656,17 +656,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <div class="send-row">
         <div class="left-side">
-            <input type="checkbox" name="cc" value="true" id="copyCheck">
-            <label for="copyCheck" class="copy-email">
-                Send a copy to my email address
-            </label>
+            <input type="checkbox" id="copyCheck">
+<label for="copyCheck" class="copy-email">
+    Send a copy to my email address
+</label>
         </div>
 
         <button type="submit" class="send-btn">Send</button>
     </div>
+<input type="hidden" name="cc" id="ccField">
 
 </form>
 </section>
+
+<script>
+const form = document.querySelector('.contact-card');
+const copyCheck = document.getElementById('copyCheck');
+const emailInput = form.querySelector('input[name="email"]');
+const ccField = document.getElementById('ccField');
+
+form.addEventListener('submit', () => {
+    if (copyCheck.checked) {
+        ccField.value = emailInput.value;
+    } else {
+        ccField.value = '';
+    }
+});
+</script>
 
 
   <footer>
@@ -902,5 +918,6 @@ document.addEventListener("keydown", (event) => {
   window.addEventListener("online", handleOnline);
 })();	
 </script>
+
 
 </html>
