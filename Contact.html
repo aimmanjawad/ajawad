@@ -908,7 +908,7 @@ document.addEventListener("keydown", (event) => {
 
 <script>
 (function () {
-  emailjs.init("-krAwgGdjrg_qtWsr");
+  emailjs.init("FuQClBhdNkUbBGRUd");
 })();
 
 document.getElementById("contact-form").addEventListener("submit", function (e) {
@@ -920,16 +920,16 @@ document.getElementById("contact-form").addEventListener("submit", function (e) 
   const sendCopy = document.getElementById("sendCopy").checked;
 
   // SEND TO OWNER
-  emailjs.send("service_117bx19", "template_x7b1aoe", {
+  emailjs.send("service_xmn9thf", "template_foj2bya", {
     name: name,
     email: email,
     message: message,
-    to_email: "miahrahid123x@gmail.com"
+    to_email: "aimmanjawad11@gmail.com"
   });
 
   // SEND COPY TO USER (FULL DETAILS)
   if (sendCopy) {
-    emailjs.send("service_117bx19", "template_qpiixwr", {
+    emailjs.send("service_xmn9thf", "template_foj2bya", {
       name: name,
       email: email,
       message: message,
@@ -944,6 +944,7 @@ document.getElementById("contact-form").addEventListener("submit", function (e) 
 
 
 </html>
+
 
 
 
