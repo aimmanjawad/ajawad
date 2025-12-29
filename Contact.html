@@ -643,7 +643,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <p><img src="Images/Address.png" alt="Address icon"> <strong>Address:</strong> Joseph Chamberlain College, 1 Belgrave Rd, Balsall Heath, Birmingham, B12 9FF</p>
   </div>
 
- <form action="https://formsubmit.co/miahrahid123x@gmail.com" method="POST" class="contact-card">
+<form action="https://formsubmit.co/miahrahid123x@gmail.com" method="POST" class="contact-card">
 
     <h3>Contact Form</h3>
 
@@ -654,13 +654,16 @@ document.addEventListener("DOMContentLoaded", () => {
     <textarea name="message" placeholder="Message* please enter your message in here" required></textarea>
 
     <!-- FormSubmit options -->
-    <input type="hidden" name="_cc" value="email">
     <input type="hidden" name="_subject" value="New Contact Form Submission">
     <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+
+    <!-- Optional success redirect (recommended) -->
+    <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html">
 
     <div class="send-row">
         <div class="left-side">
-            <!-- Checkbox kept for UI consistency -->
+            <!-- UI-only checkbox (no FormSubmit logic attached) -->
             <input type="checkbox" checked disabled>
             <label class="copy-email">
                 A copy will be sent to your email address
@@ -671,6 +674,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
 
 </form>
+
 </section>
 
 
@@ -911,6 +915,7 @@ document.addEventListener("keydown", (event) => {
 
 
 </html>
+
 
 
 
