@@ -412,7 +412,20 @@ nav ul li a:hover{
 .copy-email {
     font-size: 17px;
     font-family: Calibri, sans-serif;
-	color: var(--clock-color);
+    color: var(--clock-color);
+}
+
+#sendCopy {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+}
+
+.left-side {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-grow: 1;
 }
 
 .send-btn {
@@ -437,13 +450,6 @@ nav ul li a:hover{
     display: flex;
     align-items: center;
     width: 100%;
-}
-
-.left-side {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-grow: 1;
 }
 
 .footer-right a img {
@@ -1008,4 +1014,5 @@ body {
     transform: scale(1);
   }
 }
+
 
