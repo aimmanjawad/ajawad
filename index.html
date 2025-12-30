@@ -73,94 +73,114 @@ document.getElementById("toggleHighContrast").addEventListener("click", () => {
 <div id="cursor-glow"></div>
 <canvas id="particle-canvas"></canvas>
 <script>
-// Curser Glow //
+/* =========================
+   Cursor Glow + Particles
+   Scroll-Safe / Viewport-Locked
+========================= */
+
 const canvas = document.getElementById("particle-canvas");
 const ctx = canvas.getContext("2d");
 const cursorGlow = document.getElementById("cursor-glow");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+/* Canvas setup */
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
 
+/* State */
 let particles = [];
 let cursorX = 0;
 let cursorY = 0;
 
+/* Particle class */
 class Particle {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.size = Math.random() * 5 + 2;
-        this.speedX = (Math.random() - 0.5) * 2;
-        this.speedY = (Math.random() - 0.5) * 2;
-        this.opacity = 1;
-    }
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.size = Math.random() * 5 + 2;
+    this.vx = (Math.random() - 0.5) * 2;
+    this.vy = (Math.random() - 0.5) * 2;
+    this.alpha = 1;
+  }
 
-    update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        this.opacity -= 0.02;
-    }
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+    this.alpha -= 0.02;
+  }
 
-    draw() {
-        ctx.fillStyle = `rgba(255,255,255,${this.opacity})`;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-    }
+  draw() {
+    ctx.fillStyle = `rgba(255,255,255,${this.alpha})`;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
 }
 
-function handleParticles() {
-    for (let i = particles.length - 1; i >= 0; i--) {
-        const p = particles[i];
-        p.update();
-        p.draw();
-        if (p.opacity <= 0) particles.splice(i, 1);
+/* Particle loop */
+function updateParticles() {
+  for (let i = particles.length - 1; i >= 0; i--) {
+    const p = particles[i];
+    p.update();
+    p.draw();
+
+    if (p.alpha <= 0) {
+      particles.splice(i, 1);
     }
+  }
+
+  /* Safety cap */
+  if (particles.length > 300) {
+    particles.splice(0, particles.length - 300);
+  }
 }
 
-function updateCursor() {
-    cursorGlow.style.left = `${cursorX}px`;
-    cursorGlow.style.top = `${cursorY}px`;
-}
-
+/* Animation */
 function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    updateCursor();
-    handleParticles();
-
-    requestAnimationFrame(animate);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  updateParticles();
+  requestAnimationFrame(animate);
 }
-
 animate();
 
-window.addEventListener("mousemove", e => {
-    cursorX = e.clientX;
-    cursorY = e.clientY;
+/* Mouse move */
+window.addEventListener("mousemove", (e) => {
+  cursorX = e.clientX;
+  cursorY = e.clientY;
 
-    cursorGlow.style.transform = "translate(-50%, -50%) scale(1.18)";
-    setTimeout(() => {
-        cursorGlow.style.transform = "translate(-50%, -50%) scale(1)";
-    }, 80);
+  /* Cursor glow */
+  cursorGlow.style.left = `${cursorX}px`;
+  cursorGlow.style.top = `${cursorY}px`;
+  cursorGlow.style.transform = "translate(-50%, -50%) scale(1.18)";
 
-    for (let i = 0; i < 4; i++) {
-        particles.push(new Particle(e.x, e.y));
-    }
+  setTimeout(() => {
+    cursorGlow.style.transform = "translate(-50%, -50%) scale(1)";
+  }, 80);
+
+  /* Spawn particles */
+  for (let i = 0; i < 4; i++) {
+    particles.push(new Particle(cursorX, cursorY));
+  }
 });
 
-window.addEventListener("touchmove", e => {
-    const t = e.touches[0];
-    cursorX = t.clientX;
-    cursorY = t.clientY;
-    for (let i = 0; i < 4; i++) {
-        particles.push(new Particle(t.clientX, t.clientY));
-    }
-});
+/* Touch support */
+window.addEventListener("touchmove", (e) => {
+  const t = e.touches[0];
+  cursorX = t.clientX;
+  cursorY = t.clientY;
 
-window.addEventListener("resize", () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-});
+  cursorGlow.style.left = `${cursorX}px`;
+  cursorGlow.style.top = `${cursorY}px`;
+
+  for (let i = 0; i < 4; i++) {
+    particles.push(new Particle(cursorX, cursorY));
+  }
+}, { passive: true });
+
+/* Resize */
+window.addEventListener("resize", resizeCanvas);
 </script>
 
 
@@ -865,6 +885,7 @@ document.addEventListener("keydown", (event) => {
 
 
 </html>
+
 
 
 
