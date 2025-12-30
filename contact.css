@@ -316,6 +316,13 @@ nav ul li a:hover{
   font-family: Calibri, sans-serif;
 }
 
+.contact-card,
+.contact-card *,
+.contact-card *::before,
+.contact-card *::after {
+  box-sizing: border-box;
+}
+
 .contact-card h3 {
   text-align: center;
   margin-bottom: 10px;
@@ -326,7 +333,7 @@ nav ul li a:hover{
 
 .contact-card input,
 .contact-card textarea {
-  width: 97%;
+  width: 100%;
   padding: 8.5px;
   border-radius: 5px;
   font-family: Calibri, sans-serif;
@@ -388,6 +395,13 @@ nav ul li a:hover{
     align-items: center;
     gap: 10px;
     flex-grow: 1;
+}
+.send-row {
+  gap: 10px;
+}
+
+.left-side {
+  min-width: 0;
 }
 
 .footer-right a img {
@@ -1033,3 +1047,4 @@ body {
     transform: scale(1);
   }
 }
+
