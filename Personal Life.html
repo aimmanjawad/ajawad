@@ -151,7 +151,87 @@ document.addEventListener("keydown", (e) => {
   }
 });
 </script>
-	
+
+<div class="audio-player" role="region" aria-label="MP3 audio player">
+  <audio id="mp3Player" src="#.mp3" preload="none"></audio>
+
+  <button id="audioPlay" aria-label="Play audio">▶</button>
+
+  <input
+    id="audioSeek"
+    type="range"
+    min="0"
+    value="0"
+    step="0.01"
+    aria-label="Seek audio"
+  >
+
+  <span id="audioTime">0:00 / 0:00</span>
+
+  <input
+    id="audioVolume"
+    type="range"
+    min="0"
+    max="1"
+    step="0.05"
+    value="1"
+    aria-label="Volume"
+  >
+</div>
+
+<script>
+/* MP3 Audio Player */
+document.addEventListener("DOMContentLoaded", () => {
+  const audio = document.getElementById("mp3Player");
+  const playBtn = document.getElementById("audioPlay");
+  const seekBar = document.getElementById("audioSeek");
+  const volume = document.getElementById("audioVolume");
+  const timeLabel = document.getElementById("audioTime");
+
+  playBtn.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play();
+      playBtn.textContent = "⏸";
+    } else {
+      audio.pause();
+      playBtn.textContent = "▶";
+    }
+  });
+
+  audio.addEventListener("loadedmetadata", () => {
+    seekBar.max = audio.duration;
+    updateTime();
+  });
+
+  audio.addEventListener("timeupdate", () => {
+    seekBar.value = audio.currentTime;
+    updateTime();
+  });
+
+  seekBar.addEventListener("input", () => {
+    audio.currentTime = seekBar.value;
+  });
+
+  volume.addEventListener("input", () => {
+    audio.volume = volume.value;
+  });
+
+  audio.addEventListener("ended", () => {
+    playBtn.textContent = "▶";
+  });
+
+  function formatTime(sec) {
+    const minutes = Math.floor(sec / 60);
+    const seconds = Math.floor(sec % 60).toString().padStart(2, "0");
+    return `${minutes}:${seconds}`;
+  }
+
+  function updateTime() {
+    timeLabel.textContent =
+      `${formatTime(audio.currentTime)} / ${formatTime(audio.duration || 0)}`;
+  }
+});
+</script>
 
 <div id="cursor-glow"></div>
 <canvas id="particle-canvas"></canvas>
@@ -1114,5 +1194,6 @@ document.addEventListener("keydown", (event) => {
 
 
 </html>
+
 
 
