@@ -409,11 +409,6 @@ nav ul li a:hover{
 	background-color: var(--navbar-bg);
 }
 
-#copyCheck {
-    width: 20px;
-    height: 20px;
-}
-
 .copy-email {
     font-size: 17px;
     font-family: Calibri, sans-serif;
@@ -1013,3 +1008,4 @@ body {
     transform: scale(1);
   }
 }
+
