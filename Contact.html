@@ -10,14 +10,45 @@
 <div id="clock"></div>
 
 <div id="toastContainer"></div>
-	<button onclick="showToast('Thank you for showing support across my website!', 'info')">
+
+<button class="toast-trigger" onclick="toast.info('Thank you for showing support across my website!')">
   Support Message
-	</button>
+</button>
+
+
 <script>
-// Toast //
-window.addEventListener("load", () => {
-  document.body.classList.add("loaded");
-});
+/* Toasty */
+const toast = (() => {
+  // Create container if it doesn't exist
+  let container = document.getElementById('toastContainer');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toastContainer';
+    document.body.appendChild(container);
+  }
+
+  function show(message, type = 'info', duration = 4000) {
+    const toastEl = document.createElement('div');
+    toastEl.className = `toast ${type}`;
+    toastEl.textContent = message;
+
+    container.appendChild(toastEl);
+
+    // Auto-remove after duration
+    setTimeout(() => {
+      toastEl.classList.add('fadeOut');
+      toastEl.addEventListener('animationend', () => toastEl.remove());
+    }, duration);
+  }
+
+  return {
+    success: (msg, duration) => show(msg, 'success', duration),
+    error:   (msg, duration) => show(msg, 'error', duration),
+    warning: (msg, duration) => show(msg, 'warning', duration),
+    info:    (msg, duration) => show(msg, 'info', duration),
+    custom:  (msg, type, duration) => show(msg, type, duration)
+  };
+})();
 </script>
 
 <div id="google_translate_element" class="google-toggle"></div>
@@ -957,3 +988,4 @@ document.getElementById("contact-form").addEventListener("submit", function (e) 
 </script>
 
 </html>
+
