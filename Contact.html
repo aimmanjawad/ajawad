@@ -939,55 +939,55 @@ document.addEventListener("keydown", (event) => {
 
 <script>
 (function () {
-  emailjs.init("FuQClBhdNkUbBGRUd"); // Public Key
+  emailjs.init("FuQClBhdNkUbBGRUd"); // Public Key
 })();
 
 document.getElementById("contact-form").addEventListener("submit", function (e) {
-  e.preventDefault();
+  e.preventDefault();
 
-  const name = this.name.value;
-  const email = this.email.value;
-  const message = this.message.value;
-  const sendCopy = document.getElementById("sendCopy").checked;
+  const name = this.name.value;
+  const email = this.email.value;
+  const message = this.message.value;
+  const sendCopy = document.getElementById("sendCopy").checked;
 
-  // SEND TO OWNER
-  emailjs.send("service_xnn9thf", "template_foj2bya", {
-    name: name,
-    email: email,
-    message: message,
-    to_email: "D14572@jcc.ac.uk"
-  }).then(
-    function () {
-      console.log("Owner email sent");
-    },
-    function (error) {
-      console.error("Owner email failed:", error);
-    }
-  );
+  // SEND TO OWNER (PRIVATE)
+  emailjs.send("service_xnn9thf", "template_foj2bya", {
+    name: name,
+    user_email: email, // sender email (for Reply-To)
+    message: message
+    // ❌ DO NOT put your personal email here
+  }).then(
+    function () {
+      console.log("Owner email sent");
+    },
+    function (error) {
+      console.error("Owner email failed:", error);
+    }
+  );
 
-  // SEND COPY TO USER
-  if (sendCopy) {
-    emailjs.send("service_xnn9thf", "template_zw7apxo", {
-      name: name,
-      email: email,
-      message: message,
-      to_email: email
-    }).then(
-      function () {
-        console.log("User copy sent");
-      },
-      function (error) {
-        console.error("User email failed:", error);
-      }
-    );
-  }
+  // SEND COPY TO USER (OPTIONAL)
+  if (sendCopy) {
+    emailjs.send("service_xnn9thf", "template_zw7apxo", {
+      name: name,
+      user_email: email,
+      message: message
+    }).then(
+      function () {
+        console.log("User copy sent");
+      },
+      function (error) {
+        console.error("User email failed:", error);
+      }
+    );
+  }
 
-  alert("Message sent successfully!");
-  this.reset();
+  alert("Message sent successfully!");
+  this.reset();
 });
 </script>
 
 </html>
+
 
 
 
