@@ -1116,6 +1116,34 @@ body.focus-mode .typewriter {
     transform: scale(1.05);
 }
 
+#autoplaySpeed {
+    display: none;
+    position: absolute;
+    top: 75px;
+    left: 40px;
+    z-index: 10000;
+}
+
+#speedValue {
+    display: none;
+    position: absolute;
+    top: 115px;
+    left: 40px;
+    z-index: 10000;
+    color: #FFFFFF;
+	font-family: Calibri, sans-serif;
+}
+
+#speedHint {
+    display: none;
+    position: absolute;
+    top: 140px;
+    left: 40px;
+    z-index: 10000;
+	color: #FFFFFF;
+	font-family: Calibri, sans-serif;
+}
+
 /* Section-Based Page Transitions */
 body {
   opacity: 0;
@@ -1149,5 +1177,6 @@ body {
   .footer-right {
     margin-top: 15px;
 }
+
 
 
