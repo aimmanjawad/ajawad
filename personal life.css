@@ -1032,10 +1032,11 @@ body.high-contrast-mode *::selection {
     position: fixed;
     bottom: 100px;
     right: 20px;
-    background: white;
+    background-color: var(--button-bg);
+	border: 1px solid var(--accent-border);
     padding: 10px 15px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.18);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
     z-index: 9999;
     text-align: center;
     font-family: Arial, sans-serif;
@@ -1043,23 +1044,23 @@ body.high-contrast-mode *::selection {
 
 #voiceStart {
     font-size: 16px;
-    border: none;
+    border: 1px solid var(--accent-border);
     padding: 8px 14px;
     border-radius: 10px;
     cursor: pointer;
-    background: #007bff;
+    background-color: var(--button-bg);
     color: white;
-    transition: background .3s;
+    transition: background 0.2s ease, transform 0.2s ease;
 }
 
 #voiceStart:hover {
-    background: #005fcc;
+    transform: scale(1.05);
 }
 
 #voiceStatus {
     font-size: 14px;
     margin-top: 6px;
-    color: #444;
+    color: var(--footer-text);
 }
 
 /* Focus Mode */
@@ -1148,4 +1149,5 @@ body {
   .footer-right {
     margin-top: 15px;
 }
+
 
