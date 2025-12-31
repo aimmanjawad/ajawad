@@ -8,6 +8,17 @@
 <body id="bgcolor"></body>
 <div id="clock"></div>
 <button id="autoplayToggle" class="autoplay-btn">▶ Auto</button>
+<input
+    id="autoplaySpeed"
+    type="range"
+    min="800"
+    max="6000"
+    step="200"
+    value="2800"
+/>
+
+<div id="speedValue">Speed: 2800 ms</div>
+<div id="speedHint">Lower value = faster, Higher value = slower</div>
 
 <div class="voice-control">
     <button id="voiceStart">Voice Search</button>
@@ -784,7 +795,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script>
-/* Lightbox + Lightbox Image Auto-Player */
+/* Lightbox + Image Autoplay (Slider + Tracker + Hint) */
 document.addEventListener('DOMContentLoaded', () => {
 
     const images = document.querySelectorAll('.gallery-grid img');
@@ -794,43 +805,64 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = document.querySelector('.close');
     const nextBtn = document.getElementById('next');
     const prevBtn = document.getElementById('prev');
+
     const autoplayBtn = document.getElementById('autoplayToggle');
+    const speedSlider = document.getElementById('autoplaySpeed');
+    const speedValue = document.getElementById('speedValue');
+    const speedHint = document.getElementById('speedHint');
 
     let currentIndex = 0;
     let autoplayInterval = null;
     let isAutoplayOn = false;
 
-    const AUTOPLAY_DELAY = 2800;
+    const DEFAULT_SPEED = 2800;
+    let autoplayDelay = Number(speedSlider.value) || DEFAULT_SPEED;
 
+    // -------- SHOW IMAGE --------
     function showImage(index) {
-    const img = images[index];
-    if (!img) return;
+        const img = images[index];
+        if (!img) return;
 
-    lightboxImg.src = img.src;
+        lightboxImg.src = img.src;
 
-    const fullCaption = img.dataset.caption || '';
-    const firstPeriodIndex = fullCaption.indexOf('.');
+        const fullCaption = img.dataset.caption || '';
+        const firstPeriodIndex = fullCaption.indexOf('.');
 
-    let dateText = fullCaption;
-    let descriptionText = '';
+        let dateText = fullCaption;
+        let descriptionText = '';
 
-    if (firstPeriodIndex !== -1) {
-        dateText = fullCaption.slice(0, firstPeriodIndex + 1);
-        descriptionText = fullCaption.slice(firstPeriodIndex + 1).trim();
+        if (firstPeriodIndex !== -1) {
+            dateText = fullCaption.slice(0, firstPeriodIndex + 1);
+            descriptionText = fullCaption.slice(firstPeriodIndex + 1).trim();
+        }
+
+        caption.innerHTML = `
+            <span class="caption-date">${dateText}</span>
+            ${descriptionText}
+        `;
+
+        currentIndex = index;
     }
 
-    caption.innerHTML = `
-        <span class="caption-date">${dateText}</span>
-        ${descriptionText}
-    `;
+    // -------- SPEED LABEL --------
+    function updateSpeedLabel() {
+        const diff = autoplayDelay - DEFAULT_SPEED;
+        const sign = diff > 0 ? '+' : '';
+        const diffText = diff === 0 ? '' : ` (${sign}${diff} ms)`;
 
-    currentIndex = index;
-}
+        speedValue.textContent = `Speed: ${autoplayDelay} ms${diffText}`;
+    }
+
+    updateSpeedLabel();
+
     // -------- OPEN LIGHTBOX --------
     images.forEach((img, index) => {
         img.addEventListener('click', () => {
             lightbox.style.display = 'block';
             autoplayBtn.style.display = 'block';
+            speedSlider.style.display = 'block';
+            speedValue.style.display = 'block';
+            speedHint.style.display = 'block';
             showImage(index);
         });
     });
@@ -859,16 +891,19 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeLightbox() {
         lightbox.style.display = 'none';
         autoplayBtn.style.display = 'none';
+        speedSlider.style.display = 'none';
+        speedValue.style.display = 'none';
+        speedHint.style.display = 'none';
         stopAutoplay();
     }
 
     // -------- AUTOPLAY --------
     function startAutoplay() {
-        if (autoplayInterval) return;
+        stopAutoplay();
 
         autoplayInterval = setInterval(() => {
             showImage((currentIndex + 1) % images.length);
-        }, AUTOPLAY_DELAY);
+        }, autoplayDelay);
 
         isAutoplayOn = true;
         autoplayBtn.textContent = '⏸ Auto';
@@ -884,6 +919,14 @@ document.addEventListener('DOMContentLoaded', () => {
     autoplayBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         isAutoplayOn ? stopAutoplay() : startAutoplay();
+    });
+
+    // -------- SPEED SLIDER --------
+    speedSlider.addEventListener('input', (e) => {
+        autoplayDelay = Number(e.target.value);
+        updateSpeedLabel();
+
+        if (isAutoplayOn) startAutoplay();
     });
 
 });
@@ -1194,4 +1237,5 @@ document.addEventListener("keydown", (event) => {
 
 
 </html>
+
 
