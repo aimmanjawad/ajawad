@@ -950,12 +950,12 @@ document.getElementById("contact-form").addEventListener("submit", function (e) 
   const message = this.message.value;
   const sendCopy = document.getElementById("sendCopy").checked;
 
-  // SEND TO OWNER (PRIVATE)
+  // SEND TO OWNER
   emailjs.send("service_xnn9thf", "template_foj2bya", {
     name: name,
-    user_email: email, // sender email (for Reply-To)
-    message: message
-    // ❌ DO NOT put your personal email here
+    email: email,
+    message: message,
+    to_email: "aimmanjawad11@gmail.com"
   }).then(
     function () {
       console.log("Owner email sent");
@@ -965,12 +965,13 @@ document.getElementById("contact-form").addEventListener("submit", function (e) 
     }
   );
 
-  // SEND COPY TO USER (OPTIONAL)
+  // SEND COPY TO USER
   if (sendCopy) {
     emailjs.send("service_xnn9thf", "template_zw7apxo", {
       name: name,
-      user_email: email,
-      message: message
+      email: email,
+      message: message,
+      to_email: email
     }).then(
       function () {
         console.log("User copy sent");
@@ -987,6 +988,7 @@ document.getElementById("contact-form").addEventListener("submit", function (e) 
 </script>
 
 </html>
+
 
 
 
