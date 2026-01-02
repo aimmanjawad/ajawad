@@ -1018,150 +1018,73 @@ body {
   }
 }
 
+/* =============================== */
+/* 📱 MOBILE OVERRIDES (CRITICAL) */
+/* =============================== */
+
 @media (max-width: 600px) {
 
-  /* =============================== */
-  /* 📱 GLOBAL MOBILE STACKING */
-  /* =============================== */
-
-  body {
-    overflow-x: hidden;
+  /* 🔓 RELEASE FIXED ELEMENTS */
+  .theme-btn,
+  .contrast-toggle,
+  .google-toggle,
+  .font-resizer,
+  #visitCounter {
+    position: static !important;
+    width: 95%;
+    margin: 8px auto;
+    display: block;
+    text-align: center;
   }
 
-  main,
-  .page-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  /* =============================== */
-  /* ⏰ CLOCK (LEAVE AS IS) */
-  /* =============================== */
-
-  #clock {
-    order: 1;
-  }
-
-  /* =============================== */
-  /* 🆘 SUPPORT MESSAGE */
-  /* =============================== */
-
-  .support-message {
-    order: 2;
-  }
-
-  /* =============================== */
-  /* 🌍 GOOGLE TRANSLATE */
-  /* =============================== */
-
-  .google-translate,
-  .google-toggle {
-    order: 3;
-  }
-
-  /* =============================== */
-  /* 🎨 BACKGROUND CHANGER */
-  /* =============================== */
-
-  .theme-btn {
-    order: 4;
-  }
-
-  /* =============================== */
-  /* 🌓 CONTRAST BOOST */
-  /* =============================== */
-
-  .contrast-toggle {
-    order: 5;
-  }
-
-  /* =============================== */
-  /* 🔠 FONT ENLARGER */
-  /* =============================== */
-
+  /* 🔠 FONT BUTTONS STACK */
   .font-resizer {
-    order: 6;
-  }
-
-  /* =============================== */
-  /* 😀 EMOJI REACTIONS */
-  /* =============================== */
-
-  .emoji-reactions {
-    order: 7;
-  }
-
-  /* =============================== */
-  /* 🧭 NAV BAR */
-  /* =============================== */
-
-  nav {
-    order: 8;
-  }
-
-  nav ul {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
   }
 
-  /* =============================== */
-  /* 📦 MAIN TEXT BOX */
-  /* =============================== */
-
-  .main-content,
-  #creative-coding {
-    order: 9;
+  .font-resizer button {
+    margin: 0;
+    width: 60px;
   }
 
-  /* =============================== */
-  /* 📦 ABOUT ME BOX */
-  /* =============================== */
-
-  .about-section,
-  #about {
-    order: 10;
+  /* 😀 EMOJI REACTIONS */
+  .reaction-box {
+    order: 7;
+    width: 95%;
+    margin: 10px auto;
   }
 
-  /* =============================== */
-  /* 🎥 VIDEO */
-  /* =============================== */
-
-  video {
-    order: 11;
+  /* 🧭 NAV FIX */
+  .navbar,
+  nav {
     width: 100%;
+    margin: 10px auto;
   }
 
-  /* =============================== */
-  /* 🔊 TEXT TO SPEECH */
-  /* =============================== */
+  /* 📦 CONTENT BOXES FULL WIDTH */
+  .about-container {
+    flex-direction: column;
+    gap: 20px;
+  }
 
-  .tts-widget {
-    order: 12;
+  .about-section {
+    width: 95%;
+    font-size: 16px;
+  }
+
+  /* 🎥 VIDEO FULL WIDTH */
+  video {
     width: 95%;
     margin: auto;
   }
 
-  /* =============================== */
-  /* 🦶 FOOTER */
-  /* =============================== */
-
-  footer,
-  .footer {
-    order: 13;
-    text-align: center;
-  }
-
-  /* =============================== */
-  /* 💬 CHAT BOX (LEAVE FIXED) */
-  /* =============================== */
-
-  #chat-widget {
-    position: fixed;
-    bottom: 15px;
-    right: 15px;
-    z-index: 9999;
+  /* 🔊 TTS FIX */
+  .tts-widget {
+    width: 95%;
+    margin: 20px auto;
+    left: auto;
   }
 
 }
-
