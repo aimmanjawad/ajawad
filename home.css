@@ -1040,37 +1040,42 @@ video {
     margin-top: 15px;
 }
 
+/* ========================= */
+/* 📱 MOBILE FIX (IMPORTANT) */
+/* ========================= */
+
 @media (max-width: 600px) {
 
-  /* GENERAL */
+  /* RESET OVERFLOW */
   body {
-    font-size: 16px;
     overflow-x: hidden;
-  }
-
-  h2 {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   /* BANNER */
   #Banner {
     width: 100%;
     height: auto;
+    margin: 0;
     padding: 15px;
     font-size: 18px;
+  }
+
+  /* CLOCK */
+  #clock {
+    font-size: 28px;
   }
 
   /* NAVIGATION */
   nav ul {
     grid-template-columns: 1fr;
-    gap: 12px;
   }
 
   nav ul li a {
-    justify-content: center;
     font-size: 15px;
-    height: auto;
     padding: 12px;
+    height: auto;
+    justify-content: center;
   }
 
   /* VIDEO */
@@ -1078,19 +1083,29 @@ video {
     width: 100%;
   }
 
-  /* ABOUT SECTIONS */
+  /* ABOUT SECTION */
+  .about-container {
+    margin: 20px 10px;
+  }
+
   .about-section {
     width: 100%;
     padding: 15px;
   }
 
   .about-section h3 {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .about-section p {
-    font-size: 16px;
-    line-height: 1.7;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* TTS WIDGET */
+  .tts-widget {
+    width: 95%;
+    margin: 20px auto;
   }
 
   /* FOOTER */
@@ -1101,80 +1116,41 @@ video {
   }
 
   .footer-right {
-    margin-top: 15px;
+    margin-top: 12px;
   }
 
   /* CHAT WIDGET */
   #chat-widget {
     width: 95%;
     right: 2.5%;
-    height: 380px;
-  }
-
-  #chat-button {
-    width: 50px;
-    height: 50px;
-    font-size: 22px;
+    height: 360px;
   }
 
   /* COOKIE BANNER */
   #cookie-banner {
     flex-direction: column;
     height: auto;
-    gap: 10px;
-    font-size: 16px;
-    padding: 15px;
+    padding: 12px;
+    font-size: 14px;
+    gap: 8px;
   }
 
   #cookie-accept {
-    margin-right: 0;
     width: 100%;
+    margin-right: 0;
   }
 
-  /* FONT RESIZER + TOGGLES */
-  .font-resizer {
-    right: 5px;
-    top: 5px;
-  }
-
-  .font-resizer button {
-    width: 45px;
-    font-size: 18px;
-  }
-
+  /* FIX FIXED BUTTON CLUTTER */
+  .font-resizer,
   .theme-btn,
   .contrast-toggle,
-  .google-toggle {
-    width: 160px;
-    font-size: 13px;
-  }
-
-  /* VISIT COUNTER */
+  .google-toggle,
   #visitCounter {
-    font-size: 14px;
-    padding: 8px 14px;
-  }
-
-  /* TTS WIDGET */
-  .tts-widget {
-    width: 95%;
-  }
-}
-
-@media (max-width: 900px) {
-  #Banner {
-    width: 100%;
-  }
-
-  .about-container {
-    flex-direction: column;
-  }
-
-  .about-section {
+    position: static;
+    margin: 10px auto;
+    display: block;
     width: 90%;
+    text-align: center;
   }
 
-  video {
-    width: 90%;
-  }
 }
