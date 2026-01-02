@@ -1015,4 +1015,217 @@ body {
   }
 }
 
+/* ==================================
+   CONTACT PAGE – MOBILE SUPPORT
+   ================================== */
+@media (max-width: 768px) {
 
+  /* Global */
+  body {
+    transform: none;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  /* Clock */
+  #clock {
+    font-size: 32px;
+    padding: 10px;
+  }
+
+  /* Banner */
+  #Banner {
+    width: 100%;
+    height: auto;
+    float: none;
+    margin: 0;
+    padding: 15px;
+    text-align: center;
+  }
+
+  /* Accessibility / Utility Buttons */
+  .font-resizer,
+  .contrast-toggle,
+  .google-toggle,
+  .theme-btn {
+    position: static;
+    width: 100%;
+    margin: 8px auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .font-resizer {
+    gap: 10px;
+  }
+
+  .font-resizer button {
+    margin: 0;
+    width: 48px;
+    font-size: 18px;
+  }
+
+  /* Google Translate */
+  #google_translate_element {
+    width: 100%;
+    margin: 10px auto;
+  }
+
+  /* Navigation */
+  nav ul {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  nav ul li a {
+    justify-content: center;
+    height: auto;
+    font-size: 15px;
+  }
+
+  /* Contact Layout */
+  .contact-wrapper {
+    flex-direction: column;
+    padding: 20px 12px;
+    gap: 25px;
+  }
+
+  .contact-info {
+    width: 100%;
+  }
+
+  .contact-info .intro-text {
+    font-size: 16px;
+  }
+
+  .contact-info p {
+    font-size: 15px;
+  }
+
+  /* Map */
+  #map {
+    height: 220px;
+  }
+
+  /* Contact Card */
+  .contact-card {
+    width: 100%;
+    padding: 20px;
+    border-radius: 24px;
+  }
+
+  .contact-card h3 {
+    font-size: 20px;
+  }
+
+  .contact-card input,
+  .contact-card textarea {
+    width: 100%;
+    font-size: 15px;
+  }
+
+  .contact-card textarea {
+    height: 120px;
+  }
+
+  /* Send Row */
+  .send-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .left-side {
+    justify-content: center;
+  }
+
+  .send-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+  }
+
+  /* File Preview */
+  .preview-wrap {
+    justify-content: center;
+  }
+
+  .preview-item {
+    width: 100%;
+    max-width: 260px;
+  }
+
+  /* Footer */
+  footer {
+    width: 100%;
+    justify-content: center;
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .footer-right {
+    justify-content: center;
+  }
+
+  /* Chat */
+  #chat-widget {
+    width: 90%;
+    right: 5%;
+    bottom: 90px;
+  }
+
+  #chat-button {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+
+  /* Cookie Banner */
+  #cookie-banner {
+    flex-direction: column;
+    height: auto;
+    gap: 10px;
+    text-align: center;
+    font-size: 16px;
+  }
+
+  #cookie-banner .cookie-text {
+    max-width: 100%;
+  }
+
+  #cookie-accept {
+    margin-right: 0;
+  }
+
+  /* Visit Counter */
+  #visitCounter {
+    font-size: 14px;
+    padding: 8px 14px;
+    top: 10px;
+    right: 10px;
+  }
+
+  /* TTS Widget */
+  .tts-widget {
+    width: 100%;
+    padding: 12px;
+    left: auto;
+  }
+
+  .tts-widget button {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  /* Reactions */
+  .reaction-box {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* Performance */
+  #particle-canvas {
+    display: none;
+  }
+}
