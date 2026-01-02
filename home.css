@@ -1011,80 +1011,162 @@ body {
   to { opacity: 1; transform: scale(1); }
 }
 
-@media (max-width: 420px) {
-  .video-modal {
-    max-height: 96vh;
-    width: 100%;
+/* =========================
+   MOBILE RESPONSIVE LAYOUT
+   ========================= */
+@media (max-width: 768px) {
+
+  /* General Reset */
+  body {
+    transform: none;
   }
-}
 
-/* =============================== */
-/* 📱 MOBILE OVERRIDES (CRITICAL) */
-/* =============================== */
+  h2 {
+    font-size: 18px;
+  }
 
-@media (max-width: 600px) {
+  /* Clock */
+  #clock {
+    font-size: 32px;
+    padding: 10px;
+  }
 
-  /* 🔓 RELEASE FIXED ELEMENTS */
-  .theme-btn,
+  /* Banner */
+  #Banner {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 15px;
+    text-align: center;
+    float: none;
+  }
+
+  /* Utility Controls Stack */
+  .font-resizer,
   .contrast-toggle,
   .google-toggle,
-  .font-resizer,
-  #visitCounter {
-    position: static !important;
-    width: 95%;
+  .theme-btn {
+    position: static;
+    width: 100%;
     margin: 8px auto;
-    display: block;
-    text-align: center;
-  }
-
-  /* 🔠 FONT BUTTONS STACK */
-  .font-resizer {
     display: flex;
     justify-content: center;
+  }
+
+  .font-resizer {
     gap: 10px;
   }
 
   .font-resizer button {
     margin: 0;
-    width: 60px;
   }
 
-  /* 😀 EMOJI REACTIONS */
-  .reaction-box {
-    order: 7;
-    width: 95%;
-    margin: 10px auto;
-  }
-
-  /* 🧭 NAV FIX */
-  .navbar,
-  nav {
+  /* Google Translate */
+  #google_translate_element {
     width: 100%;
     margin: 10px auto;
   }
 
-  /* 📦 CONTENT BOXES FULL WIDTH */
+  /* Emoji Reactions */
+  .reaction-box {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* Navigation */
+  nav ul {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  nav ul li a {
+    justify-content: center;
+    height: auto;
+    font-size: 15px;
+  }
+
+  /* Main Content Layout */
   .about-container {
     flex-direction: column;
     gap: 20px;
+    margin: 20px 10px;
   }
 
   .about-section {
-    width: 95%;
+    width: 100%;
+    padding: 15px;
+  }
+
+  .about-section h3 {
+    font-size: 22px;
+  }
+
+  .about-section p {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  /* Video */
+  video {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* TTS Widget */
+  .tts-widget {
+    width: 100%;
+    margin: 20px auto;
+    padding: 12px;
+  }
+
+  .tts-widget button {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  /* Footer */
+  .footer {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+    padding: 20px;
+  }
+
+  .footer-right {
+    justify-content: center;
+  }
+
+  /* Chat Widget */
+  #chat-widget {
+    width: 90%;
+    right: 5%;
+    bottom: 90px;
+  }
+
+  #chat-button {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+
+  /* Cookie Banner */
+  #cookie-banner {
+    flex-direction: column;
+    height: auto;
+    gap: 10px;
+    text-align: center;
     font-size: 16px;
   }
 
-  /* 🎥 VIDEO FULL WIDTH */
-  video {
-    width: 95%;
-    margin: auto;
+  #cookie-accept {
+    margin-right: 0;
   }
 
-  /* 🔊 TTS FIX */
-  .tts-widget {
-    width: 95%;
-    margin: 20px auto;
-    left: auto;
+  /* Visit Counter */
+  #visitCounter {
+    font-size: 14px;
+    padding: 8px 14px;
+    top: 10px;
+    right: 10px;
   }
-
 }
