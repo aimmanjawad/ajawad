@@ -1236,14 +1236,6 @@ body {
     margin-right: 0;
   }
 
-  /* Visit Counter */
-  #visitCounter {
-    font-size: 14px;
-    padding: 8px 14px;
-    top: 10px;
-    right: 10px;
-  }
-
   /* TTS Widget */
   .tts-widget {
     width: 100%;
@@ -1430,4 +1422,5 @@ body {
     padding: 8px 14px;
   }
 }
+
 
