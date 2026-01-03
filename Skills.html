@@ -129,6 +129,8 @@ document.addEventListener("keydown", (e) => {
 <div id="bg-audio-bar">
   <span class="bg-audio-label">Background Audio</span>
 
+<button id="bg-audio-toggle">▶</button>	
+
   <input
     id="bg-audio-volume"
     type="range"
@@ -139,7 +141,7 @@ document.addEventListener("keydown", (e) => {
   >
 
   <audio id="bg-audio" loop>
-    <source src="https://aimmanjawad.github.io/ajawad/Official Emirates Boarding Music.mp3" type="audio/mpeg">
+    <source src="Audio/Official Emirates Boarding Music.mp3" type="audio/mpeg">
   </audio>
 </div>
 <script>
@@ -147,12 +149,15 @@ document.addEventListener("keydown", (e) => {
 (function () {
   const audio = document.getElementById("bg-audio");
   const volumeSlider = document.getElementById("bg-audio-volume");
+  const toggleBtn = document.getElementById("bg-audio-toggle");
 
-  const START_TIME = 2;        // seconds (0:05)
+  const START_TIME = 2;        // seconds
   const FADE_DURATION = 2000; // ms
   const FADE_STEPS = 40;
 
   let targetVolume = volumeSlider.value;
+  let isOn = true;
+
   audio.volume = 0;
 
   volumeSlider.addEventListener("input", () => {
@@ -181,6 +186,17 @@ document.addEventListener("keydown", (e) => {
 
   document.addEventListener("click", startAudioOnce);
   document.addEventListener("touchstart", startAudioOnce);
+
+  toggleBtn.addEventListener("click", () => {
+    isOn = !isOn;
+    toggleBtn.textContent = isOn ? "⏸" : "▶";
+
+    if (isOn) {
+      audio.play().catch(() => {});
+    } else {
+      audio.pause();
+    }
+  });
 })();
 </script>
 
@@ -895,6 +911,7 @@ document.addEventListener("keydown", (event) => {
 
 
 </html>
+
 
 
 
