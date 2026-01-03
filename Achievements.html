@@ -804,9 +804,11 @@ function magnify(img, zoom) {
 </script>
 
 <script>
-magnify(document.querySelector(".achievement-images .magnify"), 2);   // first image
-magnify(document.querySelector(".achievement-images2 .magnify"), 2.5); // second image
-magnify(document.querySelector(".achievement-images3 .magnify"), 3);   // third image
+if (window.innerWidth > 768) {
+  magnify(document.querySelector(".achievement-images .magnify"), 2);
+  magnify(document.querySelector(".achievement-images2 .magnify"), 2.5);
+  magnify(document.querySelector(".achievement-images3 .magnify"), 3);
+}
 </script>
 
 
@@ -998,6 +1000,7 @@ document.addEventListener("keydown", (event) => {
 
 
 </html>
+
 
 
 
