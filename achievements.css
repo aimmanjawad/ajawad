@@ -1462,23 +1462,4 @@ body {
   }
 }
 
-/* ===== FIX DESKTOP LAYOUT AFTER MAGNIFIER ===== */
-.achievement-images.magnifier-container,
-.achievement-images2.magnifier-container,
-.achievement-images3.magnifier-container {
-  display: block;
-  width: fit-content;
-}
-
-.achievement-layout {
-  align-items: flex-start;
-}
-
-/* ===== Lock desktop image sizing (pre-magnifier behaviour) ===== */
-.achievement-images,
-.achievement-images2,
-.achievement-images3 {
-  flex-shrink: 0;
-}
-
 
