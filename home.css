@@ -1014,8 +1014,7 @@ body {
 
 /* Background Audio */
 #bg-audio-bar {
-  margin-top: 2px;
-  margin-bottom: 15px;
+  margin-top: 18px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -1206,5 +1205,6 @@ body {
     right: 10px;
   }
 }
+
 
 
