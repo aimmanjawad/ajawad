@@ -447,8 +447,10 @@ video {
     flex-direction: row;
     gap: 20px;
     width: 40%;
-    justify-content: space-between;
+    justify-content: flex-start; /* restore original spacing */
+    align-items: flex-start;
 }
+
 
 .achievement-images img {
     width: 500px;
@@ -1459,4 +1461,11 @@ body {
 
 .achievement-layout {
   align-items: flex-start;
+}
+
+/* ===== Lock desktop image sizing (pre-magnifier behaviour) ===== */
+.achievement-images,
+.achievement-images2,
+.achievement-images3 {
+  flex-shrink: 0;
 }
