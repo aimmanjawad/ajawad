@@ -636,22 +636,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <div class="achievement-section">
   <div class="achievement-layout">
-      <div class="achievement-images">
-          <img src="https://aimmanjawad.github.io/ajawad/OCR Level 2 Cambridge Technical Diploma in Business Qualification.jpg" 
-               alt="Certificate" class="magnify">
-      </div>
-      <div class="middle-image-column">
 
-          <div class="achievement-images2">
-              <img src="https://aimmanjawad.github.io/ajawad/Achievements1.png" 
-                   alt="Business Studies" class="magnify">
-          </div>
-          <div class="achievement-images3">
-              <img src="https://aimmanjawad.github.io/ajawad/Achievements2.jpg" 
-                   alt="Exam Hall" class="magnify">
-          </div>
+    <!-- IMAGE 1 -->
+    <div class="achievement-images magnifier-container">
+      <img src="https://aimmanjawad.github.io/ajawad/OCR%20Level%202%20Cambridge%20Technical%20Diploma%20in%20Business%20Qualification.jpg" 
+           alt="Certificate" class="magnify">
+
+      <button class="mobile-magnify-btn" aria-label="Zoom image">🔍</button>
+    </div>
+
+    <div class="middle-image-column">
+
+      <!-- IMAGE 2 -->
+      <div class="achievement-images2 magnifier-container">
+        <img src="https://aimmanjawad.github.io/ajawad/Achievements1.png" 
+             alt="Business Studies" class="magnify">
+
+        <button class="mobile-magnify-btn" aria-label="Zoom image">🔍</button>
       </div>
+
+      <!-- IMAGE 3 -->
+      <div class="achievement-images3 magnifier-container">
+        <img src="https://aimmanjawad.github.io/ajawad/Achievements2.jpg" 
+             alt="Exam Hall" class="magnify">
+
+        <button class="mobile-magnify-btn" aria-label="Zoom image">🔍</button>
+      </div>
+
+    </div>
   </div>
+</div>
+
 
   <div class="about-section">
       <h3>
@@ -954,6 +969,7 @@ document.addEventListener("keydown", (event) => {
 
 
 </html>
+
 
 
 
