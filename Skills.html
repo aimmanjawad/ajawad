@@ -524,6 +524,32 @@ updateClock();
     <button class="reaction-btn" data-reaction="wow">😮 <span>0</span></button>
     <button class="reaction-btn" data-reaction="laugh">😁 <span>0</span></button>
 </div>
+
+<audio id="reaction-sfx" src="https://aimmanjawad.github.io/ajawad/fairydust.mp3" preload="auto"></audio>
+<script>
+const reactionButtons = document.querySelectorAll(".reaction-btn");
+const sfx = document.getElementById("reaction-sfx");
+
+reactionButtons.forEach(button => {
+  button.addEventListener("click", () => {
+
+    // 🔊 SOUND ON EMOJI CLICK
+    sfx.currentTime = 0;
+    sfx.play();
+
+    // count logic
+    const span = button.querySelector("span");
+    let count = parseInt(span.textContent);
+    count++;
+    span.textContent = count;
+
+    localStorage.setItem(
+      `reaction-${button.dataset.reaction}`,
+      count
+    );
+  });
+});
+</script>
 <script>
 const reactionButtons = document.querySelectorAll(".reaction-btn");
 
@@ -911,6 +937,7 @@ document.addEventListener("keydown", (event) => {
 
 
 </html>
+
 
 
 
