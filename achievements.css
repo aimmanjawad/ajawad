@@ -1197,14 +1197,6 @@ body {
     margin-right: 0;
   }
 
-  /* Visit Counter */
-  #visitCounter {
-    font-size: 14px;
-    padding: 8px 14px;
-    top: 10px;
-    right: 10px;
-  }
-
   /* Performance (Mobile) */
   #cursor-glow,
   #particle-canvas {
@@ -1429,3 +1421,11 @@ body {
   cursor: pointer;
 }
 
+@media (max-width: 1024px) {
+  #visitCounter {
+    top: 60px !important;
+    right: 10px !important;
+    font-size: 14px;
+    padding: 8px 14px;
+  }
+}
