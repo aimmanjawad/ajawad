@@ -446,8 +446,9 @@ video {
     display: flex;
     flex-direction: row;
     gap: 20px;
-    width: 40%;
-    justify-content: flex-start; /* restore original spacing */
+    width: auto;
+    max-width: 1100px;
+    justify-content: space-between;
     align-items: flex-start;
 }
 
@@ -1479,4 +1480,5 @@ body {
 .achievement-images3 {
   flex-shrink: 0;
 }
+
 
