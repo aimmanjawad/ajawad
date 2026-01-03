@@ -1014,7 +1014,8 @@ body {
 
 /* Background Audio */
 #bg-audio-bar {
-  margin-top: 18px;
+  margin-top: 2px;
+  margin-bottom: 15px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -1031,6 +1032,16 @@ body {
   font-size: 14px;
   color: #FFFFFF;
   white-space: nowrap;
+}
+
+#bg-audio-toggle {
+  font-size: 16px;
+  cursor: pointer;
+  background-color: var(--button-bg);
+  border: 1px solid var(--accent-border);
+  color: #FFFFFF;
+  padding: 6px 12px;
+  border-radius: 6px;
 }
 
 #bg-audio-volume {
@@ -1195,4 +1206,5 @@ body {
     right: 10px;
   }
 }
+
 
