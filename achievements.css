@@ -1415,3 +1415,36 @@ body {
   border: none;
   cursor: pointer;
 }
+
+/* ===== Fix mobile layout to match desktop structure ===== */
+@media (max-width: 768px) {
+
+  .achievement-layout {
+    flex-direction: row; /* keep original layout */
+    width: 100%;
+    justify-content: center;
+  }
+
+  .achievement-images,
+  .achievement-images2,
+  .achievement-images3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .achievement-images img {
+    width: 90%;
+    height: auto;
+  }
+
+  .achievement-images2 img,
+  .achievement-images3 img {
+    width: 90%;
+    height: auto;
+  }
+
+  .middle-image-column {
+    gap: 12px;
+  }
+}
