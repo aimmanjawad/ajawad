@@ -934,6 +934,16 @@ body {
   white-space: nowrap;
 }
 
+#bg-audio-toggle {
+  font-size: 16px;
+  cursor: pointer;
+  background-color: var(--button-bg);
+  border: 1px solid var(--accent-border);
+  color: #FFFFFF;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
 #bg-audio-volume {
   flex: 1;
   cursor: pointer;
@@ -1281,4 +1291,5 @@ body {
     display: none;
   }
 }
+
 
