@@ -1416,11 +1416,12 @@ body {
 
 @media (max-width: 1024px) {
   #visitCounter {
-    top: 65px !important;
+    top: 60px !important;
     right: 10px !important;
     font-size: 14px;
     padding: 8px 14px;
   }
 }
+
 
 
