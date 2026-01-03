@@ -1201,10 +1201,11 @@ body {
   #visitCounter {
     font-size: 14px;
     padding: 8px 14px;
-    top: 10px;
+    top: 50px; /* moved down so it doesn't block the clock */
     right: 10px;
   }
 }
+
 
 
 
