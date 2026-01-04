@@ -705,11 +705,9 @@ document.addEventListener("DOMContentLoaded", () => {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
 
 <script>
-  baguetteBox.run('.achievement-layout', {
-    captions: true,
-    buttons: 'auto',
-    overlayBackgroundColor: 'rgba(0,0,0,0.9)',
-  });
+  if (window.innerWidth <= 768) {
+    baguetteBox.run('.achievement-layout');
+  }
 </script>
 
 
@@ -1016,6 +1014,7 @@ document.addEventListener("keydown", (event) => {
 
 
 </html>
+
 
 
 
