@@ -1197,6 +1197,101 @@ body {
     margin-right: 0;
   }
 
+/* iPad / Tablet ONLY */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  /* Reset anything mobile breaks */
+  body {
+    transform: none;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  /* Clock */
+  #clock {
+    font-size: 36px;
+    padding: 12px;
+  }
+
+  /* Banner */
+  #Banner {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    float: none;
+  }
+
+  /* Utility Controls – keep horizontal on iPad */
+  .font-resizer,
+  .contrast-toggle,
+  .google-toggle,
+  .theme-btn {
+    position: static;
+    width: auto;
+    margin: 10px;
+    display: inline-flex;
+    justify-content: center;
+  }
+
+  .font-resizer {
+    gap: 12px;
+  }
+
+  /* Navigation – 2 columns works better on iPad */
+  nav ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  nav ul li a {
+    font-size: 16px;
+    height: auto;
+  }
+
+  /* Main Content */
+  .about-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin: 30px 20px;
+  }
+
+  .about-section {
+    width: 48%;
+    padding: 20px;
+  }
+
+  .about-section h3 {
+    font-size: 24px;
+  }
+
+  .about-section p {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  /* Video */
+  video {
+    width: 100%;
+  }
+
+  /* Footer */
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  /* Chat Widget */
+  #chat-widget {
+    width: 380px;
+    right: 20px;
+    bottom: 100px;
+  }
+}
+
 @media (max-width: 1024px) {
   #visitCounter {
     top: 60px !important;
@@ -1205,6 +1300,7 @@ body {
     padding: 8px 14px;
   }
 }
+
 
 
 
