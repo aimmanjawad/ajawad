@@ -6,6 +6,7 @@
 <title>AchievementsPage</title>
 <link href="achievements.css" rel="stylesheet" type="text/css">
 <script src="script.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css">
 </head>
 <body id="bgcolor"></body>
 <div id="clock"></div>
@@ -679,119 +680,37 @@ document.addEventListener("DOMContentLoaded", () => {
 <div class="achievement-section">
   <div class="achievement-layout">
 
-    <div class="achievement-images">
-      <img src="https://aimmanjawad.github.io/ajawad/OCR Level 2 Cambridge Technical Diploma in Business Qualification.jpg"
-           alt="Certificate" class="magnify">
-      <button class="zoom-btn" aria-label="Zoom image">🔍</button>
-    </div>
+<div class="achievement-images">
+  <a href="https://aimmanjawad.github.io/ajawad/OCR Level 2 Cambridge Technical Diploma in Business Qualification.jpg" class="lightbox">
+    <img src="https://aimmanjawad.github.io/ajawad/OCR Level 2 Cambridge Technical Diploma in Business Qualification.jpg" alt="Certificate">
+  </a>
+</div>
 
-    <div class="middle-image-column">
+<div class="achievement-images2">
+  <a href="https://aimmanjawad.github.io/ajawad/Achievements1.png" class="lightbox">
+    <img src="https://aimmanjawad.github.io/ajawad/Achievements1.png" alt="Business Studies">
+  </a>
+</div>
 
-      <div class="achievement-images2">
-        <img src="https://aimmanjawad.github.io/ajawad/Achievements1.png"
-             alt="Business Studies" class="magnify">
-        <button class="zoom-btn" aria-label="Zoom image">🔍</button>
-      </div>
-
-      <div class="achievement-images3">
-        <img src="https://aimmanjawad.github.io/ajawad/Achievements2.jpg"
-             alt="Exam Hall" class="magnify">
-        <button class="zoom-btn" aria-label="Zoom image">🔍</button>
-      </div>
+<div class="achievement-images3">
+  <a href="https://aimmanjawad.github.io/ajawad/Achievements2.jpg" class="lightbox">
+    <img src="https://aimmanjawad.github.io/ajawad/Achievements2.jpg" alt="Exam Hall">
+  </a>
+</div>
 
     </div>
   </div>
 </div>
 
-
-	<style>
-	/* Hide zoom feature everywhere by default */
-.zoom-btn {
-  display: none;
-}
-
-/* Mobile ONLY */
-@media (max-width: 768px) {
-/* Zoom button hidden everywhere by default */
-.zoom-btn {
-  display: none;
-}
-
-/* MOBILE ONLY */
-@media (max-width: 768px) {
-
-  /* Make existing containers positioning anchors */
-  .achievement-images,
-  .achievement-images2,
-  .achievement-images3 {
-    position: relative;
-  }
-
-  .magnify {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .zoom-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(0,0,0,0.65);
-    color: white;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    z-index: 3;
-  }
-
-  .zoom-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-  }
-
-  .zoom-overlay img {
-    max-width: 95%;
-    max-height: 95%;
-  }
-}
-	</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
 
 <script>
-if (window.innerWidth <= 768) {
-  document.querySelectorAll('.zoom-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const img = btn.previousElementSibling;
-
-      const overlay = document.createElement('div');
-      overlay.className = 'zoom-overlay';
-
-      const zoomedImg = document.createElement('img');
-      zoomedImg.src = img.src;
-      zoomedImg.alt = img.alt;
-
-      overlay.appendChild(zoomedImg);
-      document.body.appendChild(overlay);
-
-      overlay.addEventListener('click', () => {
-        overlay.remove();
-      });
-    });
+  baguetteBox.run('.achievement-layout', {
+    captions: true,
+    buttons: 'auto',
+    overlayBackgroundColor: 'rgba(0,0,0,0.9)',
   });
-}
 </script>
-
 
 
   <div class="about-section">
@@ -1097,6 +1016,7 @@ document.addEventListener("keydown", (event) => {
 
 
 </html>
+
 
 
 
