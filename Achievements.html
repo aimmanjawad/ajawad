@@ -681,22 +681,103 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <div class="achievement-section">
   <div class="achievement-layout">
-      <div class="achievement-images">
-          <img src="https://aimmanjawad.github.io/ajawad/OCR Level 2 Cambridge Technical Diploma in Business Qualification.jpg" 
-               alt="Certificate" class="magnify">
-      </div>
-      <div class="middle-image-column">
 
-          <div class="achievement-images2">
-              <img src="https://aimmanjawad.github.io/ajawad/Achievements1.png" 
-                   alt="Business Studies" class="magnify">
-          </div>
-          <div class="achievement-images3">
-              <img src="https://aimmanjawad.github.io/ajawad/Achievements2.jpg" 
-                   alt="Exam Hall" class="magnify">
-          </div>
+    <div class="achievement-images zoom-wrapper">
+      <img src="https://aimmanjawad.github.io/ajawad/OCR Level 2 Cambridge Technical Diploma in Business Qualification.jpg"
+           alt="Certificate" class="magnify">
+      <button class="zoom-btn" aria-label="Zoom image">🔍</button>
+    </div>
+
+    <div class="middle-image-column">
+
+      <div class="achievement-images2 zoom-wrapper">
+        <img src="https://aimmanjawad.github.io/ajawad/Achievements1.png"
+             alt="Business Studies" class="magnify">
+        <button class="zoom-btn" aria-label="Zoom image">🔍</button>
       </div>
+
+      <div class="achievement-images3 zoom-wrapper">
+        <img src="https://aimmanjawad.github.io/ajawad/Achievements2.jpg"
+             alt="Exam Hall" class="magnify">
+        <button class="zoom-btn" aria-label="Zoom image">🔍</button>
+      </div>
+
+    </div>
   </div>
+</div>
+
+	<style>
+	/* Hide zoom feature everywhere by default */
+.zoom-btn {
+  display: none;
+}
+
+/* Mobile ONLY */
+@media (max-width: 768px) {
+
+  .zoom-wrapper {
+    position: relative;
+  }
+
+  .zoom-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.65);
+    color: white;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 3;
+  }
+
+  .zoom-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+
+  .zoom-overlay img {
+    max-width: 95%;
+    max-height: 95%;
+  }
+}
+
+	</style>
+
+<script>
+if (window.innerWidth <= 768) {
+  document.querySelectorAll('.zoom-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const img = btn.previousElementSibling;
+
+      const overlay = document.createElement('div');
+      overlay.className = 'zoom-overlay';
+
+      const zoomedImg = document.createElement('img');
+      zoomedImg.src = img.src;
+      zoomedImg.alt = img.alt;
+
+      overlay.appendChild(zoomedImg);
+      document.body.appendChild(overlay);
+
+      overlay.addEventListener('click', () => {
+        overlay.remove();
+      });
+    });
+  });
+}
+</script>
 
 
   <div class="about-section">
@@ -1002,6 +1083,7 @@ document.addEventListener("keydown", (event) => {
 
 
 </html>
+
 
 
 
