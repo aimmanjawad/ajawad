@@ -679,35 +679,68 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <div class="achievement-section">
   <div class="achievement-layout">
+      <div class="achievement-images">
+          <img src="Images/OCR Level 2 Cambridge Technical Diploma in Business Qualification.jpg" 
+               alt="Certificate" class="magnify">
+      </div>
+      <div class="middle-image-column">
 
-<div class="achievement-images">
-  <a href="https://aimmanjawad.github.io/ajawad/OCR Level 2 Cambridge Technical Diploma in Business Qualification.jpg" class="lightbox">
-    <img src="https://aimmanjawad.github.io/ajawad/OCR Level 2 Cambridge Technical Diploma in Business Qualification.jpg" alt="Certificate">
-  </a>
-</div>
-
-<div class="achievement-images2">
-  <a href="https://aimmanjawad.github.io/ajawad/Achievements1.png" class="lightbox">
-    <img src="https://aimmanjawad.github.io/ajawad/Achievements1.png" alt="Business Studies">
-  </a>
-</div>
-
-<div class="achievement-images3">
-  <a href="https://aimmanjawad.github.io/ajawad/Achievements2.jpg" class="lightbox">
-    <img src="https://aimmanjawad.github.io/ajawad/Achievements2.jpg" alt="Exam Hall">
-  </a>
-</div>
-
-    </div>
+          <div class="achievement-images2">
+              <img src="Images/Achievements1.png" 
+                   alt="Business Studies" class="magnify">
+          </div>
+          <div class="achievement-images3">
+              <img src="Images/Achievements2.jpg" 
+                   alt="Exam Hall" class="magnify">
+          </div>
+      </div>
   </div>
-</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+<style>
+/* Mobile fullscreen image overlay */
+.mobile-image-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.mobile-image-overlay img {
+  max-width: 95vw;
+  max-height: 95vh;
+  object-fit: contain;
+}
+</style>
 
 <script>
-  if (window.innerWidth <= 768) {
-    baguetteBox.run('.achievement-layout');
-  }
+if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+
+  document.querySelectorAll('.magnify').forEach(img => {
+
+    img.addEventListener('click', () => {
+
+      const overlay = document.createElement('div');
+      overlay.className = 'mobile-image-overlay';
+
+      const zoomedImg = document.createElement('img');
+      zoomedImg.src = img.src;
+      zoomedImg.alt = img.alt;
+
+      overlay.appendChild(zoomedImg);
+      document.body.appendChild(overlay);
+
+      overlay.addEventListener('click', () => {
+        overlay.remove();
+      });
+
+    });
+
+  });
+
+}
 </script>
 
 
@@ -1014,6 +1047,7 @@ document.addEventListener("keydown", (event) => {
 
 
 </html>
+
 
 
 
