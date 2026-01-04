@@ -166,7 +166,6 @@ body.midnight-theme {
   gap: 12px;
   z-index: 99999;
   align-items: center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
 }
 
 .toast {
@@ -440,18 +439,16 @@ video {
 	height: 100%;
   border: 1px solid #000;
   display: block;
+justify-content: flex-start;
 }
 
 .achievement-layout {
     display: flex;
     flex-direction: row;
     gap: 20px;
-    width: auto;
-    max-width: 1100px;
+    width: 40%;
     justify-content: space-between;
-    align-items: flex-start;
 }
-
 
 .achievement-images img {
     width: 500px;
@@ -1366,3 +1363,4 @@ body {
     display: none;
   }
 }
+
