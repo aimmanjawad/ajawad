@@ -682,7 +682,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <div class="achievement-section">
   <div class="achievement-layout">
 
-    <div class="achievement-images zoom-wrapper">
+    <div class="achievement-images">
       <img src="https://aimmanjawad.github.io/ajawad/OCR Level 2 Cambridge Technical Diploma in Business Qualification.jpg"
            alt="Certificate" class="magnify">
       <button class="zoom-btn" aria-label="Zoom image">🔍</button>
@@ -690,13 +690,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <div class="middle-image-column">
 
-      <div class="achievement-images2 zoom-wrapper">
+      <div class="achievement-images2">
         <img src="https://aimmanjawad.github.io/ajawad/Achievements1.png"
              alt="Business Studies" class="magnify">
         <button class="zoom-btn" aria-label="Zoom image">🔍</button>
       </div>
 
-      <div class="achievement-images3 zoom-wrapper">
+      <div class="achievement-images3">
         <img src="https://aimmanjawad.github.io/ajawad/Achievements2.jpg"
              alt="Exam Hall" class="magnify">
         <button class="zoom-btn" aria-label="Zoom image">🔍</button>
@@ -706,6 +706,7 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 </div>
 
+
 	<style>
 	/* Hide zoom feature everywhere by default */
 .zoom-btn {
@@ -714,12 +715,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* Mobile ONLY */
 @media (max-width: 768px) {
-
-.zoom-wrapper img {
-  width: 100%;
-  height: auto;
-  display: block;
+/* Zoom button hidden everywhere by default */
+.zoom-btn {
+  display: none;
 }
+
+/* MOBILE ONLY */
+@media (max-width: 768px) {
+
+  /* Make existing containers positioning anchors */
+  .achievement-images,
+  .achievement-images2,
+  .achievement-images3 {
+    position: relative;
+  }
+
+  .magnify {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
 
   .zoom-btn {
     display: flex;
@@ -754,7 +769,6 @@ document.addEventListener("DOMContentLoaded", () => {
     max-height: 95%;
   }
 }
-
 	</style>
 
 <script>
@@ -780,6 +794,7 @@ if (window.innerWidth <= 768) {
   });
 }
 </script>
+
 
 
   <div class="about-section">
@@ -1085,6 +1100,7 @@ document.addEventListener("keydown", (event) => {
 
 
 </html>
+
 
 
 
