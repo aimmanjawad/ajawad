@@ -11,6 +11,68 @@
 <body id="bgcolor"></body>
 <div id="clock"></div>
 
+<button id="backToTop">⬆️</button>
+<style>
+/* Back to Top Button */
+#backToTop {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  background: var(--primary-bg);
+  color: var(--clock-color);
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 9999;
+  display: none;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  animation: floaty 3s ease-in-out infinite;
+}
+
+/* Floating bubble animation */
+@keyframes floaty {
+  0% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-10px); }
+  100% { transform: translateX(-50%) translateY(0); }
+}
+
+/* Hide on desktop */
+@media (min-width: 1025px) {
+  #backToTop {
+    display: none !important;
+  }
+}
+</style>
+
+
+<script>
+  const backToTop = document.getElementById("backToTop");
+
+  window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY;
+    const pageHeight = document.documentElement.scrollHeight;
+    const viewHeight = window.innerHeight;
+
+    // Show button when user is near bottom
+    if (scrollY > pageHeight - viewHeight * 2) {
+      backToTop.style.display = "block";
+    } else {
+      backToTop.style.display = "none";
+    }
+  });
+
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "instant" // instant jump
+    });
+  });
+</script>
+
 <div id="deviceInfoPanel">
   <p id="deviceType">Device: </p>
   <p id="touchSupport">Touch: </p>
@@ -1276,6 +1338,7 @@ document.addEventListener("keydown", (event) => {
 
 
 </html>
+
 
 
 
