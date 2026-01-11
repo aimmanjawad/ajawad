@@ -691,6 +691,26 @@ document.getElementById("visitCount").innerText = totalVisits;
 });
 </script>
 
+<button id="clearCacheBtn">🧹 Clear Cache?</button>
+<script>
+  document.getElementById("clearCacheBtn").addEventListener("click", () => {
+    // Clear site storage
+    localStorage.clear();
+    sessionStorage.clear();
+
+    // Optional: Clear Service Worker cache (if used)
+    if ("caches" in window) {
+      caches.keys().then(names => {
+        names.forEach(name => caches.delete(name));
+      });
+    }
+
+    // Small delay so user sees action
+    setTimeout(() => {
+      location.reload(true);
+    }, 300);
+  });
+</script>
 
 <script>
 // Live Clock //
@@ -1248,6 +1268,7 @@ document.addEventListener("keydown", (event) => {
 
 
 </html>
+
 
 
 
