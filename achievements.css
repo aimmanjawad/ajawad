@@ -1006,12 +1006,12 @@ body {
   cursor: pointer;
 }
 
-/* ===============================
-   ACHIEVEMENTS – MOBILE SUPPORT
-   =============================== */
+/* =========================
+   ACHIEVEMENTS PAGE – MOBILE MODE
+   ========================= */
 @media (max-width: 768px) {
 
-  /* Global fixes */
+  /* General */
   body {
     transform: none;
   }
@@ -1030,18 +1030,18 @@ body {
   #Banner {
     width: 100%;
     height: auto;
-    float: none;
     margin: 0;
     padding: 15px;
+    float: none;
     text-align: center;
   }
 
-  /* Utility / Accessibility Controls */
+  /* Accessibility / Utility Buttons */
   .font-resizer,
   .contrast-toggle,
   .google-toggle,
-  #focusToggle,
-  .theme-btn {
+  .theme-btn,
+  #focusToggle {
     position: static;
     width: 100%;
     margin: 8px auto;
@@ -1063,6 +1063,12 @@ body {
     margin: 10px auto;
   }
 
+  /* Emoji Reactions */
+  .reaction-box {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
   /* Navigation */
   nav ul {
     grid-template-columns: 1fr;
@@ -1075,18 +1081,17 @@ body {
     font-size: 15px;
   }
 
-  /* Main About Section */
+  /* Skills Content Layout */
   .about-container {
-    display: flex;
     flex-direction: column;
     gap: 20px;
     margin: 20px 10px;
-    width: auto;
+    padding: 0;
   }
 
   .about-section {
     width: 100%;
-    min-height: auto;
+    height: auto;
     margin-left: 0;
     padding: 15px;
   }
@@ -1100,51 +1105,25 @@ body {
     line-height: 1.6;
   }
 
-  /* ACHIEVEMENTS LAYOUT */
-  .achievement-section {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+  /* Quad Images */
+  .quad-images {
     width: 100%;
-    margin: 20px auto;
-  }
-
-  .achievement-layout {
-    flex-direction: column;
-    width: 100%;
-    gap: 15px;
-  }
-
-  /* Achievement Images */
-  .achievement-images img,
-  .achievement-images2 img,
-  .achievement-images3 img {
-    width: 100%;
-    height: auto;
-  }
-
-  .middle-image-column {
+    grid-template-columns: 1fr;
     gap: 12px;
   }
 
-  /* Disable magnifier on touch */
-  .img-magnifier-lens {
-    display: none;
+  .quad-images img {
+    height: auto;
   }
 
   /* Video */
   video {
     width: 100%;
     margin: 0 auto;
+    border-radius: 8px;
   }
 
-  /* Emoji Reactions */
-  .reaction-box {
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  /* TTS */
+  /* TTS Widget */
   .tts-widget {
     width: 100%;
     margin: 20px auto;
@@ -1194,7 +1173,7 @@ body {
     margin-right: 0;
   }
 
-  /* Performance (Mobile) */
+  /* Optional Performance Tweaks */
   #cursor-glow,
   #particle-canvas {
     display: none;
@@ -1302,7 +1281,7 @@ body {
     top: 60px !important;
     right: 10px !important;
     font-size: 14px;
-    padding: 28px 34px;
+    padding: 8px 14px;
   }
 }
 
