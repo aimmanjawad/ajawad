@@ -1265,7 +1265,7 @@ body {
 
   .about-section {
     width: 48%;
-    padding: 50px;
+    padding: 20px;
   }
 
   .about-section h3 {
@@ -1302,9 +1302,10 @@ body {
     top: 60px !important;
     right: 10px !important;
     font-size: 14px;
-    padding: 8px 14px;
+    padding: 28px 34px;
   }
 }
+
 
 
 
